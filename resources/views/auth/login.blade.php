@@ -26,24 +26,34 @@
             <figure><img src="asset/images/signin-image.jpg" alt="sing up image"></figure>
             <a href="{{ route('register')}}" class="signup-image-link">Buat Akun</a>
           </div>
-
           <div class="signin-form">
             <h2 class="form-title">LogIn</h2>
             <form method="POST" action="{{ route('login') }}">
+              @csrf
               <div class="form-group">
-                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                <input type="text" name="your_name" id="your_name" placeholder="User Name" />
+                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                <input type="text" name="username" id="username" placeholder="User Name" />
+                @error('username')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <div class="form-group">
-                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                <input type="password" name="your_pass" id="your_pass" placeholder="Password" />
+                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                <input type="password" name="password" id="password" placeholder="Password" />
+                @error('password')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <div class="form-group">
-                <input type="checkbox" name="remember" id="remember" class="agree-term" />
+                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                 <label for="remember" class="label-agree-term"><span><span></span></span>Ingatkan Saya</label>
               </div>
               <div class="form-group form-button">
-                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+                <input type="submit" name="signin" id="signin" class="form-submit" value="Log In" />
               </div>
             </form>
           </div>
