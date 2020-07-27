@@ -55,18 +55,13 @@
           <div class="col-lg">
             <div class="panel tabbed-panel panel-primary">
               <div class="panel-heading clearfix">
-                <div class="pull-right">
+                <div class="pull-left">
                   <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab-primary-1" data-toggle="tab">Page 1</a></li>
-                    <li><a href="#tab-primary-2" data-toggle="tab">Page 2</a></li>
-                    <li><a href="#tab-primary-3" data-toggle="tab">Page 3</a></li>
-                    <li class="dropdown">
-                      <a href="#" data-toggle="dropdown">More <span class="caret"></span></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#tab-primary-4" data-toggle="tab">Page 4</a></li>
-                        <li><a href="#tab-primary-5" data-toggle="tab">Page 5</a></li>
-                      </ul>
-                    </li>
+                    <li><a href="#tab-primary-1">HOME</a></li>
+                    <li><a href="#tab-primary-2">PROFILE</a></li>
+                    <li><a href="#tab-primary-3">FORM OBSERASI BAGI PESERTA PKPM</a></li>
+                    <li><a href="#tab-primary-3">CONTAK</a></li>
+                    <li><a href="{{ route('login')}}">LOGIN</a></li>
                   </ul>
                 </div>
               </div>
