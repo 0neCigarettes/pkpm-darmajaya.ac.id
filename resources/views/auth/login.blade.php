@@ -12,11 +12,12 @@
 
   <!-- Main css -->
   <link rel="stylesheet" href="{{ url('asset/css/style.css')}}">
+
 </head>
 
-<body>
+<body style="background-color: #293860;">
 
-  <div class="main">
+  <div style="background-color: #293860;" class="main">
 
     <!-- Sing in  Form -->
     <section class="sign-in">
@@ -41,7 +42,7 @@
               </div>
               <div class="form-group">
                 <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                <input type="password" name="password" id="password" placeholder="Password" />
+                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" />
                 @error('password')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -58,7 +59,7 @@
               </span>
               @enderror
               <div class="form-group form-button">
-                <button type="submit" class="form-submit"> Log In</button>
+                <button style="background-color: #368ee0;" type="submit" class="form-submit"> Log In</button>
               </div>
             </form>
           </div>

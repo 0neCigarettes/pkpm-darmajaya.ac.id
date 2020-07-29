@@ -45,5 +45,5 @@ Route::group(['middleware' => ['auth', 'ceklevel:2']], function () {
 Route::group(['middleware' => ['auth', 'ceklevel:3']], function () {
 
     Route::get('/mahasiswa', 'MahasiswaContoller@index')->name('daftarPKPM');
-    Route::get('/uploadLaporan', 'MahasiswaContoller@upload')->name('uploadLapranPKPM');
+    Route::get('/mahasiswa/uploadLaporan', 'MahasiswaContoller@upload')->name('uploadLapranPKPM');
 });
