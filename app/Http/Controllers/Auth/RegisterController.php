@@ -29,11 +29,12 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-    // protected function redirectTo()
-    // {
-    //     return ('auth.login');
-    // }
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo()
+    {
+        return '/mahasiswa';
+        // return $this->route('login');
+    }
 
     /**
      * Create a new controller instance.
@@ -42,7 +43,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except('logout');
     }
 
     /**

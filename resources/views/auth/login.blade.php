@@ -28,7 +28,7 @@
           </div>
           <div class="signin-form">
             <h2 class="form-title">LogIn</h2>
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login')}}">
               @csrf
               <div class="form-group">
                 <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
@@ -52,8 +52,13 @@
                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                 <label for="remember" class="label-agree-term"><span><span></span></span>Ingatkan Saya</label>
               </div>
+              @error('username')
+              <span class="invalid-feedback" role="alert">
+                <strong>Username / Password Salah !</strong>
+              </span>
+              @enderror
               <div class="form-group form-button">
-                <input type="submit" name="signin" id="signin" class="form-submit" value="Log In" />
+                <button type="submit" class="form-submit"> Log In</button>
               </div>
             </form>
           </div>

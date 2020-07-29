@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 //guest akses
 Route::get('/', 'guestController@index')->name('guestIndex');
 
-//semua bisa akses login
+
 Route::get('/login', function () {
     return view('auth.login');
 });
@@ -28,22 +28,22 @@ Auth::routes();
 //level 3 = Mahasiwa
 
 //admin
-Route::group(['middleware' => ['auth', 'cekLevel:1']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:1']], function () {
 
     //route admin
-    Route::get('/admin', 'adminController@index')->name('cekRegistrasiPKPM');
+    Route::get('/home', 'adminController@index')->name('cekRegistrasiPKPM');
 });
 
 //sekjur
-Route::group(['middleware' => ['auth', 'cekLevel:2']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:2']], function () {
 
     //route sekjur
 
 });
 
 //mahasiswa
-Route::group(['middleware' => ['auth', 'cekLevel:3']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:3']], function () {
 
-    //route mahasiswa
-
+    Route::get('/mahasiswa', 'MahasiswaContoller@index')->name('daftarPKPM');
+    Route::get('/uploadLaporan', 'MahasiswaContoller@upload')->name('uploadLapranPKPM');
 });
