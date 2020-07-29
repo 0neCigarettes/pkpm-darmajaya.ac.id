@@ -43,7 +43,7 @@
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label>Scan Bukti Pembayaran BPP Semester Sekarang</label>
+            <label>Scan Bukti Pembayaran BPP</label>
             <input type="file" name="scanStrukBpp" class="form-control" required>
           </div>
         </div>
@@ -65,7 +65,7 @@
             <input required class="form-control" name="ukuranKaos" type="text" placeholder="Ukuran Kaos">
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-12">
           <div class="form-group">
             <input class="form-control btn btn-primary" type="submit" value="Daftar">
           </div>
