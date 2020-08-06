@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\pesertaModel;
+use App\laporanModel;
+use App\User;
 use Illuminate\Http\Request;
 
 class adminController extends Controller
@@ -13,9 +16,71 @@ class adminController extends Controller
      */
     public function index()
     {
-        return view('layouts.adminLayouts');
+        $totalPeserta = pesertaModel::count();
+        $belumTerkonfirmasi = pesertaModel::where('status', 1)->count();
+        $terkonfirmasi = pesertaModel::where('status', 2)->count();
+        // // $fileLama = laporanModel::where('id', $id)->first()['laporan'];
+        $data = pesertaModel::get();
+        if (auth()->user()->level == 1) {
+            return view('admin.index')->with([
+                'datas' => $data,
+                'a' => $totalPeserta,
+                'b' => $terkonfirmasi,
+                'c' => $belumTerkonfirmasi,
+            ]);
+        } else if (auth()->user()->level == 2) {
+            return view('sekjur.index')->with([
+                'datas' => $data,
+                'a' => $totalPeserta,
+                'b' => $terkonfirmasi,
+                'c' => $belumTerkonfirmasi,
+            ]);
+        }
+        // return json_encode($totalPeserta);
     }
 
+    public function konfirmasiView()
+    {
+        $data = pesertaModel::where('status', 1)->get();
+        // return json_encode($data);
+        if (auth()->user()->level == 1) {
+            return view('admin.konfirmasiPeserta')->with(['datas' => $data]);
+        } else if (auth()->user()->level == 2) {
+            return view('sekjur.konfirmasiPeserta')->with(['datas' => $data]);
+        }
+    }
+
+    public function lihatLaporanpkpm()
+    {
+        $data = laporanModel::get();
+        if (auth()->user()->level == 1) {
+            return view('admin.lihatLaporanpkpm')->with(['datas' => $data]);
+        } else if (auth()->user()->level == 2) {
+            return view('sekjur.lihatLaporanpkpm')->with(['datas' => $data]);
+        }
+    }
+
+    public function konfirmasiPendaftaran(request $request, $id)
+    {
+        $data = $request->all();
+        $ganti = 2;
+        $data['status'] = $ganti;
+        $update = pesertaModel::where('id', $id)
+            ->update($data);
+        $alert = [
+            'afterAction' => true
+        ];
+
+        if ($update) {
+            $alert['msg'] = 'Konfirmasi Sukses';
+            $alert['sukses'] = false;
+        } else {
+            $alert['msg'] = 'Konfirmasi Gagal';
+            $alert['sukses'] = false;
+        }
+
+        return redirect()->back()->with($alert);
+    }
     /**
      * Show the form for creating a new resource.
      *

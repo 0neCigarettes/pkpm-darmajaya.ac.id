@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class sekjurController extends Controller
 {
@@ -13,7 +14,7 @@ class sekjurController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.tambahSekjur');
     }
 
     /**
@@ -34,7 +35,42 @@ class sekjurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request = $request->all();
+        $sukses;
+        $msg;
+        if ($this->emailExist($request->input('email'))) {
+            $sukses = false;
+            $msg = 'Gagal Menambah Sekjur, Karena Email Sudah Digunakan.';
+        } else {
+            $password = bcrypt('12345678');
+            $request->request->add(['password' => $password]);
+            $level = 2;
+            $request->request->add(['level' => $level]);
+            $insert = User::create($request->all());
+
+            if ($insert) {
+                $msg = 'Berhasil Menambah Admin.';
+                $sukses = true;
+            } else {
+                $msg = 'Gagal Menambah Admin.';
+                $sukses = false;
+            }
+        }
+        return redirect()->back()->with([
+            'afterAction' => true,
+            'msg' => $msg,
+            'sukses' => $sukses
+        ]);
+        // return json_encode($request->all());
+    }
+    public function emailExist($email)
+    {
+        $cek = User::where('email', '=', $email)->first();
+        if ($cek == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**

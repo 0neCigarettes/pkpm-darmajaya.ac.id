@@ -13,6 +13,12 @@
   <!-- Bootstrap Core CSS -->
   <link href="{{ url('./newasset/css/bootstrap.min.css')}}" rel="stylesheet">
 
+  <!-- DataTables CSS -->
+  <link href="{{ url('./newasset/css/dataTables/dataTables.bootstrap.css')}}" rel="stylesheet">
+
+  <!-- DataTables Responsive CSS -->
+  <link href="{{ url('./newasset/css/dataTables/dataTables.responsive.css')}}" rel="stylesheet">
+
   <!-- MetisMenu CSS -->
   <link href="{{ url('./newasset/css/metisMenu.min.css')}}" rel="stylesheet">
 
@@ -107,7 +113,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <h1 class="page-header">=</h1>
+            <h1 class="page-header">@yield('header_content')</h1>
           </div>
         </div>
         <div class="row ">
@@ -157,9 +163,12 @@
   <script src="{{ url('./newasset/js/morris.min.js')}}"></script>
   <script src="{{ url('./newasset/js/morris-data.js')}}"></script>
 
+  <!-- DataTables JavaScript -->
+    <script src="{{ url('./newasset/js/dataTables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ url('./newasset/js/dataTables/dataTables.bootstrap.min.js')}}"></script>
+
   <!-- Custom Theme JavaScript -->
   <script src="{{ url('./newasset/js/startmin.js')}}"></script>
-
 </body>
 
 </html>

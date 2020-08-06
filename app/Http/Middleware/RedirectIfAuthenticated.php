@@ -19,6 +19,11 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            if (auth()->user()->level == 2) {
+                return '/sekjur';
+            } else if (auth()->user()->level == 3) {
+                return '/mahasiswa';
+            }
             return redirect(RouteServiceProvider::HOME);
         }
 
