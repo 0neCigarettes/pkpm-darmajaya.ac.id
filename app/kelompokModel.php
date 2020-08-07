@@ -8,5 +8,5 @@ class kelompokModel extends Model
 {
     protected $table = 'tb_kelompok';
 
-    protected $fillable = ['nameKelompok', 'dpl', 'namaTempat'];
+    protected $fillable = ['namaKelompok', 'dpl', 'namaTempat'];
 }

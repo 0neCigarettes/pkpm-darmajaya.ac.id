@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\kelompokModel;
 use Illuminate\Http\Request;
 
 class kelompokController extends Controller
@@ -13,7 +14,8 @@ class kelompokController extends Controller
      */
     public function index()
     {
-        //
+        $data = kelompokModel::get();
+        return view('sekjur.indexKelompok')->with(['datas' => $data]);
     }
 
     /**
@@ -32,6 +34,26 @@ class kelompokController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function kelompok(request $request)
+    {
+        $data = $request->all();
+        $insert = kelompokModel::create($data);
+
+        $alert = [
+            'afterAction' => true
+        ];
+        if ($insert) {
+            $alert['msg'] = 'Berhasil Menambah Kelompok';
+            $alert['sukses'] = true;
+        } else {
+            $alert['msg'] = 'Gagal Menambah Kelompok';
+            $alert['sukses'] = false;
+        }
+
+        return redirect()->back()->with($alert);
+        // return json_encode($data);
+    }
     public function store(Request $request)
     {
         //

@@ -31,9 +31,9 @@ class panduanContrller extends Controller
     {
         $data = panduanModel::get();
         if (auth()->user()->level == 1) {
-            return view('admin.uploadPanduanpkpm')->with('datas', $data);
+            return view('admin.uploadPanduanpkpm')->with(['datas' => $data]);
         } else if (auth()->user()->level == 2) {
-            return view('sekjur.uploadPanduanpkpm')->with('datas', $data);
+            return view('sekjur.uploadPanduanpkpm')->with(['datas' => $data]);
         }
     }
 

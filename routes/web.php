@@ -63,6 +63,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:2']], function () {
     Route::get('/sekjur/konfirmasi_peserta/konfirmasi/{id}', 'adminController@konfirmasiPendaftaran')->name('konfirmasiPendaftaranbysekjur');
 
     //mahasiswa bagi kelompok
+    Route::get('/sekjur/kelompok_mahasiswa', 'kelompokController@index')->name('indexKelompok');
+    Route::post('/sekjur/kelompok_mahasiswa/add', 'kelompokController@kelompok')->name('aadKelompok');
 
 
     //mahasiswa laporan

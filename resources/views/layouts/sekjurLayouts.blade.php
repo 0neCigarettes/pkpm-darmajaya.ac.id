@@ -93,7 +93,7 @@
             <a href="{{ route('indexSekjur')}}" class="active"><i class="fa fa-edit fa-fw"></i> Data Mahasiswa PKPM</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-table fa-fw"></i> Daftar Kelompok pkpm</a>
+              <a href="{{ route('indexKelompok')}}"><i class="fa fa-table fa-fw"></i> Data Kelompok pkpm</a>
             </li>
             <li>
               <a href="{{ route('lihatLaporaninekjur')}}"><i class="fa fa-table fa-fw"></i> Laporan PKPM Mahasiswa</a>
