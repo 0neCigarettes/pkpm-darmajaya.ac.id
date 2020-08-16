@@ -73,7 +73,7 @@ class adminController extends Controller
 
         if ($update) {
             $alert['msg'] = 'Konfirmasi Sukses';
-            $alert['sukses'] = false;
+            $alert['sukses'] = true;
         } else {
             $alert['msg'] = 'Konfirmasi Gagal';
             $alert['sukses'] = false;

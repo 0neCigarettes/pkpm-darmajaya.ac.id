@@ -27,9 +27,10 @@
               <table class="table table-striped table-bordered table-hover">
                   <thead>
                       <tr>
-                          <th>Nama Kelompok</th>
+                          <th>Nomor Kelompok</th>
                           <th>Dosen Pembimbing Lapangan</th>
                           <th>Nama Tempat/Desa</th>
+                          <th>Aksi</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -38,6 +39,9 @@
                       <td>{{ $data['namaKelompok'] }}</td>
                       <td>{{ $data['dpl'] }}</td>
                       <td>{{ $data['namaTempat'] }}</td>
+                      <td>
+                        <a href="{{ route('getAllPeserta', $data['idKelompok'])}}" class="btn btn-primary">Input Peserta</a>
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -53,19 +57,19 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Tambah Kelompok</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
+            <h4 class="modal-title">Tambah Kelompok</h4>
           </div>
           <div class="modal-body">
-            <form action="{{ route('aadKelompok')}}" method="POST">
+            <form action="{{ route('addKelompok')}}" method="POST">
                 @csrf
               <div class="container-fluid">
                 <div class="col-md-12">
                     <div class="form-group">
-                      <label>Nama Kelompok</label>
-                      <input type="text" name="namaKelompok" class="form-control" placeholder="Nama Kelompok" required>
+                      <label>Nomor Kelompok</label>
+                      <input type="Number" name="namaKelompok" class="form-control" placeholder="Nomor Kelompok" required>
                     </div>
                     <div class="form-group">
                       <label>Dosen Pembimbing Lapangan</label>
