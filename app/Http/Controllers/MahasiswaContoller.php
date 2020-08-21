@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\pesertaModel;
-use \App\User;
+use App\pesertaModel;
+use App\beritaModel;
+use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -27,10 +28,12 @@ class MahasiswaContoller extends Controller
         'pembayaranPKPM' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'pembayaranBPP' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'transkripKRS' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        'transkripNilai' => 'required|image|mimes:jpeg,png,jpg|max:2048',
     ];
 
     public function index()
     {
+        $berita = beritaModel::all();
         $userActive = Auth::user()->id;
         $cekUser = User::join('tb_pesertapkpm', 'users.id', '=', 'tb_pesertapkpm.idUser')
             ->where('users.id', '=', $userActive)->count();
@@ -42,16 +45,25 @@ class MahasiswaContoller extends Controller
             $resposnse['msg'] = 'Anda Sudah Mendaftar';
             $resposnse['status'] = false;
         }
-        return view('mahasiswa.daftarPKPM')->with(['resposnse' => $resposnse]);
+        return view('mahasiswa.daftarPKPM')
+            ->with([
+                'resposnse' => $resposnse,
+                'beritas' => $berita
+            ]);
     }
 
     public function tampilData()
     {
+        $berita = beritaModel::all();
         $userActive = Auth::user()->id;
         $data = pesertaModel::select('tb_pesertapkpm.*')
             ->where('idUser', '=', $userActive)->get();
 
-        return view('mahasiswa.tampilData')->with(['datas' => $data]);
+        return view('mahasiswa.tampilData')
+            ->with([
+                'datas' => $data,
+                'beritas' => $berita
+            ]);
         // return json_encode($data);
     }
 
@@ -84,17 +96,21 @@ class MahasiswaContoller extends Controller
             $file1 = $request->file('pembayaranPKPM');
             $file2 = $request->file('pembayaranBPP');
             $file3 = $request->file('transkripKRS');
+            $file4 = $request->file('transkripNilai');
             $name1 = Str::random(16) . round(microtime(true)) . '.' . $file1->guessExtension();
             $name2 = Str::random(16) . round(microtime(true)) . '.' . $file2->guessExtension();
             $name3 = Str::random(16) . round(microtime(true)) . '.' . $file3->guessExtension();
+            $name4 = Str::random(16) . round(microtime(true)) . '.' . $file4->guessExtension();
 
             $file1->move('file/scanPKPM', $name1);
             $file2->move('file/scanBPP', $name2);
             $file3->move('file/scanKrs', $name3);
+            $file4->move('file/scanNilai', $name4);
 
             $data['pembayaranPKPM'] = $name1;
             $data['pembayaranBPP'] = $name2;
             $data['transkripKRS'] = $name3;
+            $data['transkripNilai'] = $name4;
             $data['idUser'] = Auth::user()->id;
             $data['nama'] = Auth::user()->name;
             $simpan = pesertaModel::create($data);

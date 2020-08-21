@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\beritaModel;
+use App\panduanModel;
+use App\observasiModel;
 use Illuminate\Http\Request;
 
 class guestController extends Controller
@@ -13,7 +16,38 @@ class guestController extends Controller
      */
     public function index()
     {
-        return view('guest.index');
+        $data = panduanModel::all();
+        $berita = beritaModel::get();
+        return view('guest.berita')->with(['datas' => $data, 'beritas' => $berita]);
+    }
+
+    public function observasi()
+    {
+        $observasi = observasiModel::get();
+        $data = panduanModel::all();
+        $berita = beritaModel::get();
+        return view('guest.observasi')->with(['observasis' => $observasi, 'datas' => $data, 'beritas' => $berita]);
+    }
+
+    public function kkn()
+    {
+        $data = panduanModel::all();
+        $berita = beritaModel::get();
+        return view('guest.kknF')->with(['datas' => $data, 'beritas' => $berita]);
+    }
+
+    public function kontak()
+    {
+        $data = panduanModel::all();
+        $berita = beritaModel::get();
+        return view('guest.kontak')->with(['datas' => $data, 'beritas' => $berita]);
+    }
+
+    public function pkpm()
+    {
+        $data = panduanModel::all();
+        $berita = beritaModel::get();
+        return view('guest.pkpm')->with(['datas' => $data, 'beritas' => $berita]);
     }
 
     /**

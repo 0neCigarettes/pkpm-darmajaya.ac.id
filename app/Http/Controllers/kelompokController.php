@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\pesertaModel;
 use App\kelompokModel;
+use PDF;
 use App\detailKelompokModel;
 use Illuminate\Http\Request;
+use illuminate\Support\Str;
 
 class kelompokController extends Controller
 {
@@ -16,8 +18,51 @@ class kelompokController extends Controller
 	 */
 	public function index()
 	{
+		$allKelompok = detailkelompokModel::join('tb_kelompok', 'tb_detail_kelompok.idKelompok', '=', 'tb_kelompok.idKelompok')
+			->join('tb_pesertapkpm', 'tb_detail_kelompok.idPeserta', '=', 'tb_pesertapkpm.id')
+			->select(
+				'tb_pesertapkpm.npm',
+				'tb_pesertapkpm.nama',
+				'tb_pesertapkpm.jurusan',
+				'tb_kelompok.namaKelompok',
+				'tb_kelompok.dpl',
+				'tb_kelompok.namaTempat'
+			)->orderBy('tb_kelompok.namaKelompok')->get();
+
+		$nokel = rand();
 		$data = kelompokModel::get();
-		return view('sekjur.indexKelompok')->with(['datas' => $data]);
+		return view('sekjur.indexKelompok')
+			->with([
+				'datas' => $data,
+				'no' => $nokel,
+				'dataKelompoks' => $allKelompok
+			]);
+		// return json_encode($allKelompok);
+	}
+
+	public static function pdf()
+	{
+		$nama = Str::random(13) . round(microtime(true));
+		$allKelompok = detailkelompokModel::join('tb_kelompok', 'tb_detail_kelompok.idKelompok', '=', 'tb_kelompok.idKelompok')
+			->join('tb_pesertapkpm', 'tb_detail_kelompok.idPeserta', '=', 'tb_pesertapkpm.id')
+			->select(
+				'tb_pesertapkpm.npm',
+				'tb_pesertapkpm.nama',
+				'tb_pesertapkpm.jurusan',
+				'tb_kelompok.namaKelompok',
+				'tb_kelompok.dpl',
+				'tb_kelompok.namaTempat'
+			)->orderBy('tb_kelompok.namaKelompok')->get();
+
+		$pdf = PDF::loadView('sekjur/cetakPDF', ['datas' => $allKelompok], [])->setPaper('a4', 'potrait');
+		return $pdf->download($nama . '.pdf');
+
+		// return view('sekjur.cetakPDF');
+		// $pdf = PDF::loadView('sekjur/cetakPDF');
+		// $pdf = PDF::loadView('sekjur.cetakPDF', ['a' => $allKelompok]);
+		// return $pdf->stream('dafatar_peserta.pdf', array('Attachments' => false))->header('Content-Type', 'application/pdf');
+		// return $pdf->stream();
+		// return json_encode($allKelompok);
 	}
 
 	/**
@@ -39,9 +84,11 @@ class kelompokController extends Controller
 
 	public function getPesertaByKelompok($id)
 	{
+		$dataKelompok = kelompokModel::where('idKelompok', $id)->first();
 		$data = detailkelompokModel::join('tb_kelompok', 'tb_detail_kelompok.idKelompok', '=', 'tb_kelompok.idKelompok')
 			->join('tb_pesertapkpm', 'tb_detail_kelompok.idPeserta', '=', 'tb_pesertapkpm.id')
 			->select(
+				'tb_detail_kelompok.idDetail',
 				'tb_pesertapkpm.npm',
 				'tb_pesertapkpm.nama',
 				'tb_pesertapkpm.jurusan',
@@ -53,20 +100,41 @@ class kelompokController extends Controller
 		// return json_encode($data);
 
 		return view('sekjur.viewInputPeserta')->with([
-			'datas' => $data
+			'datas' => $data,
+			'idKelompok' => $id,
+			'dataKelompok' => $dataKelompok,
 		]);
 	}
 
-	public function getPesertaNonKelompok()
+	public function tambahpeserta($idkelompok, $idpeserta)
 	{
-		$cekData = detailkelompokModel::pluck('idPeserta')->all();
-		$data = pesertaModel::whereNotIn('id', $cekData)->where('status', '>', 0)->select('*')->get();
 
-		return json_encode($data);
+		$insert = detailkelompokModel::create([
+			'idKelompok' => $idkelompok,
+			'idPeserta' => $idpeserta,
+		]);
+
+		$alert = [
+			'afterAction' => true,
+		];
+		if ($insert) {
+			$alert['msg'] = 'Peserta Berhasil Ditambahkan';
+			$alert['sukses'] = true;
+		} else {
+			$alert['msg'] = 'Maaf ! Peserta Gagal Ditambahakan';
+			$alert['sukses'] = false;
+		}
+
+		return redirect()->route('getAllPeserta', $idkelompok)->with($alert);
 	}
 
-	public function inputPeserta(Request $request, $id)
+	public function addPeserta($idkelompok)
 	{
+		$dataKelompok = kelompokModel::where('idKelompok', $idkelompok)->first();
+		$cekData = detailkelompokModel::pluck('idPeserta')->all();
+		$data = pesertaModel::whereNotIn('id', $cekData)->where('status', '>', 0)->select('*')->get();
+		// var_dump($idkelompok);
+		return view('sekjur.allpeserta')->with(['datas' => $data, 'idkelompok' => $idkelompok, 'dataKelompok' => $dataKelompok]);
 	}
 
 	public function kelompok(request $request)
@@ -133,8 +201,19 @@ class kelompokController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy($id, $idkelompok)
 	{
-		//
+		$delete = detailkelompokModel::where('idDetail', $id)->delete();
+		$alert = [
+			'afterAction' => true,
+		];
+		if ($delete) {
+			$alert['msg'] = 'Peserta Berhasil Dihapus';
+			$alert['sukses'] = true;
+		} else {
+			$alert['msg'] = 'Maaf ! Peserta Gagal Dihapus';
+			$alert['sukses'] = false;
+		}
+		return redirect()->route('getAllPeserta', $idkelompok)->with($alert);
 	}
 }

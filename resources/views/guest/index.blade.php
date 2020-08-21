@@ -34,396 +34,329 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+<style>
+    h1{
+    font-family: sans-serif;
+    font-weight: normal;
+    color: white;
+  }
+
+  div{
+    font-family: Sans-Serif;
+  }
+
+  .malasngoding-slider { 
+    border: 10px solid #efefef; 
+    position: relative; 
+    overflow: hidden; 
+    background: #efefef;
+  }
+
+  .malasngoding-slider { 
+    margin:20px auto;
+    width: 768px;
+    height: 450px; 
+  }
+
+  .isi-slider img { 
+    width: 768px;
+    height: 450px; 
+    float: left;
+  }
+
+  .isi-slider { 
+    position: absolute; 
+    width:3900px;  
+
+    /*pengaturan durasi lama tampil gambar bisa di atur di bawah ini*/
+    animation-name:slider;
+    animation-duration:8s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count:infinite;
+    -webkit-animation-name:slider;
+    -webkit-animation-duration:10s;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count:infinite;
+    -moz-animation-name:slider;
+    -moz-animation-duration:10s;
+    -moz-animation-timing-function: ease-in-out;
+    -moz-animation-iteration-count:infinite;
+    -o-animation-name:slider;
+    -o-animation-duration:16s;
+    -o-animation-timing-function: ease-in-out;
+    -o-animation-iteration-count:infinite;
+  }
+
+
+  /*saat gambar di hover oleh cursor mouse maka berhenti slide*/
+  .isi-slider:hover { 
+    -webkit-animation-play-state:paused; 
+    -moz-animation-play-state:paused; 
+    -o-animation-play-state:paused; 
+    animation-play-state:paused; }
+  }
+
+  .isi-slider img { 
+    float: right; 
+  }
+
+  .malasngoding-slider:after { 
+    font-size: 150px; 
+    position: absolute; 
+    z-index: 12; 
+    color: rgba(255,255,255, 0); 
+    left: 300px; top: 80px; 
+    -webkit-transition: 1s all ease-in-out; 
+    -moz-transition: 1s all ease-in-out; 
+    transition: 1s all ease-in-out; 
+  }
+
+  .malasngoding-slider:hover:after { 
+    color: rgba(255,255,255, 0.6);  
+  }
+
+
+
+  @-moz-keyframes slider {     
+    0% {
+      left: 0; opacity: 0; 
+    }     
+    2% {
+      opacity: 1; 
+    }     
+    20% {
+      left: 0; opacity: 1; 
+    }     
+    21% {
+      opacity: 0; 
+    }     
+    24% {
+      opacity: 0; 
+    }     
+    25% {
+      left: -768px; opacity: 1; 
+    }       
+    45% {
+      left: -768px; opacity: 1; 
+    }     
+    46% {
+      opacity: 0; 
+    }     
+    48% {
+      opacity: 0; 
+    }     
+    50% {
+      left: -1536px; opacity: 1; 
+    }     
+    70% {
+      left: -1536px; opacity: 1; 
+    }     
+    72% {
+      opacity: 0; 
+    }     
+    74% {
+      opacity: 0; 
+    }    
+    75% {
+      left: -2304px; opacity: 1; 
+    }   	
+    95% {
+      left: -2304px; opacity: 1; 
+    }   	
+    97% { 
+      left: -2304px; opacity: 0;
+    }   	
+    100% {
+      left: 0; opacity: 0; 
+    }
+  } 
+
+  @-webkit-keyframes slider {     
+    0% {
+      left: 0; opacity: 0; 
+    }     
+    2% {
+      opacity: 1; 
+    }     
+    20% {
+      left: 0; opacity: 1; 
+    }     
+    21% {
+      opacity: 0; 
+    }     
+    24% {
+      opacity: 0; 
+    }     
+    25% {
+      left: -768px; opacity: 1; 
+    }       
+    45% {
+      left: -768px; opacity: 1; 
+    }     
+    46% {
+      opacity: 0; 
+    }     
+    48% {
+      opacity: 0; 
+    }     
+    50% {
+      left: -1536px; opacity: 1; 
+    }     
+    70% {
+      left: -1536px; opacity: 1; 
+    }     
+    72% {
+      opacity: 0; 
+    }     
+    74% {
+      opacity: 0; 
+    }    
+    75% {
+      left: -2304px; opacity: 1; 
+    }   	
+    95% {
+      left: -2304px; opacity: 1; 
+    }   	
+    97% { 
+      left: -2304px; opacity: 0;
+    }   	
+    100% {
+      left: 0; opacity: 0; 
+    }
+  } 
+
+
+  @keyframes slider {     
+    0% {
+      left: 0; opacity: 0; 
+    }     
+    2% {
+      opacity: 1; 
+    }     
+    20% {
+      left: 0; opacity: 1; 
+    }     
+    21% {
+      opacity: 0; 
+    }     
+    24% {
+      opacity: 0; 
+    }     
+    25% {
+      left: -768px; opacity: 1; 
+    }     
+    45% {
+      left: -768px; opacity: 1; 
+    }     
+    46% {
+      opacity: 0; 
+    }     
+    48% {
+      opacity: 0; 
+    }     
+    50% {
+      left: -1536px; opacity: 1; 
+    }     
+    70% {
+      left: -1536px; opacity: 1; 
+    }     
+    72% {
+      opacity: 0; 
+    }     
+    74% {
+      opacity: 0; 
+    }    
+    75% {
+      left: -2304px; opacity: 1; 
+    }   	
+    95% {
+      left: -2304px; opacity: 1; 
+    }   	
+    97% { 
+      left: -2304px; opacity: 0; 
+    } 
+
+    100% {
+      left: 0; opacity: 0; 
+    }
+  }
+</style>
 </head>
 
-<body style="background: #293860;>
-
+<body>
   <div id="wrapper">
     <div class="col-lg-10">
       <!-- Navigation -->
       <div class="col-lg-offset-2" style="background: white; margin-top: ;" >
-        <div id="wrapper">
           <div class="container-fluid">
             <div class="row text-white" style="background: #325db2">
               <div class="col-lg-12" style="background: #325db2">
                 <h1 class="page-header"><b>PKPM Darmajaya</b></h1>
               </div>
-                <div class="panel tabbed-panel panel-primary" style="background: #325db2">
-                  <div class="panel-heading clearfix" style="background: #325db2">
-                    <div class="pull-left">
-                      <ul class="nav nav-tabs">
-                        <li><a href="#tab-primary-1">HOME</a></li>
-                        <li><a href="#tab-primary-2">PROFILE</a></li>
-                        <li><a href="#tab-primary-3">FORM OBSERASI BAGI PESERTA PKPM</a></li>
-                        <li><a href="#tab-primary-3">CONTAK</a></li>
-                        <li><a href="{{ route('login')}}">LOGIN</a></li>
-                      </ul>
-                    </div>
+              <div class="panel tabbed-panel panel-primary" style="background: #325db2">
+                <div class="panel-heading clearfix" style="background: #325db2">
+                  <div class="pull-left">
+                    <ul class="nav nav-tabs">
+                      <li><a href="{{ route('berita')}}">HOME</a></li>
+                      <li><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PROFILE</a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background: white;">
+                            <a class="dropdown-item" href="{{ route('pkpm')}}">PKPM</a><br>
+                            <a class="dropdown-item" href="{{ route('kkn')}}">KKN Fakultas</a>
+                          </div>
+                      </li>
+                      <li><a href="{{ route('observasiInGuest')}}">FORM OBSERASI BAGI PESERTA PKPM</a></li>
+                      <li><a href="{{ route('kontak')}}">CONTAK</a></li>
+                      <li><a href="{{ route('login')}}">LOGIN</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="malasngoding-slider">
+                  <div class="isi-slider">
+                    <img src="{{ url('file/slide/1.jpeg')}}" alt="Gambar 1">
+                    <img src="{{ url('file/slide/2.jpeg')}}" alt="Gambar 2">
+                    <img src="{{ url('file/slide/3.jpeg')}}" alt="Gambar 3">
+                    <img src="{{ url('file/slide/4.jpeg')}}" alt="Gambar 4">
+                    <img src="{{ url('file/slide/5.jpeg')}}" alt="Gambar 5">
                   </div>
                 </div>
               </div>
             </div>
-            <br>
-            <!-- /.row -->
-            <div class="row">
-              <div class="col-lg-8">
-                {{-- Content --}}
-                <div class="panel panel-default">
-                  <!-- /.panel-heading -->
-                  <div class="panel-body">
-                    <ul class="timeline">
-                      <li>
-                        <div class="timeline-badge"><i class="fa fa-check"></i>
-                        </div>
-                        <div class="timeline-panel">
-                          <div class="timeline-heading">
-                            <h4 class="timeline-title">Lorem ipsum dolor</h4>
-      
-                            <p>
-                              <small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago via
-                                Twitter
-                              </small>
-                            </p>
-                          </div>
-                          <div class="timeline-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero
-                              laboriosam
-                              dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est
-                              cum
-                              veniam excepturi. Maiores praesentium, porro voluptas suscipit facere
-                              rem
-                              dicta, debitis.</p>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="timeline-inverted">
-                        <div class="timeline-badge warning"><i class="fa fa-credit-card"></i>
-                        </div>
-                        <div class="timeline-panel">
-                          <div class="timeline-heading">
-                            <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolorem
-                              quibusdam, tenetur commodi provident cumque magni voluptatem libero,
-                              quis
-                              rerum. Fugiat esse debitis optio, tempore. Animi officiis alias, officia
-                              repellendus.</p>
-      
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium
-                              maiores
-                              odit qui est tempora eos, nostrum provident explicabo dignissimos
-                              debitis
-                              vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.</p>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="timeline-badge danger"><i class="fa fa-bomb"></i>
-                        </div>
-                        <div class="timeline-panel">
-                          <div class="timeline-heading">
-                            <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus
-                              numquam
-                              facilis enim eaque, tenetur nam id qui vel velit similique nihil iure
-                              molestias aliquam, voluptatem totam quaerat, magni commodi quisquam.</p>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="timeline-inverted">
-                        <div class="timeline-panel">
-                          <div class="timeline-heading">
-                            <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates est
-                              quaerat asperiores sapiente, eligendi, nihil. Itaque quos, alias
-                              sapiente
-                              rerum quas odit! Aperiam officiis quidem delectus libero, omnis ut
-                              debitis!</p>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="timeline-badge info"><i class="fa fa-save"></i>
-                        </div>
-                        <div class="timeline-panel">
-                          <div class="timeline-heading">
-                            <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis minus
-                              modi
-                              quam ipsum alias at est molestiae excepturi delectus nesciunt, quibusdam
-                              debitis amet, beatae consequuntur impedit nulla qui! Laborum, atque.</p>
-                            <hr>
-                            <div class="btn-group">
-                              <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-gear"></i> <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a>
-                                </li>
-                                <li><a href="#">Another action</a>
-                                </li>
-                                <li><a href="#">Something else here</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="timeline-panel">
-                          <div class="timeline-heading">
-                            <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi fuga odio
-                              quibusdam. Iure expedita, incidunt unde quis nam! Quod, quisquam.
-                              Officia
-                              quam qui adipisci quas consequuntur nostrum sequi. Consequuntur,
-                              commodi.</p>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="timeline-inverted">
-                        <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i>
-                        </div>
-                        <div class="timeline-panel">
-                          <div class="timeline-heading">
-                            <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                          </div>
-                          <div class="timeline-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt
-                              obcaecati,
-                              quaerat tempore officia voluptas debitis consectetur culpa amet,
-                              accusamus
-                              dolorum fugiat, animi dicta aperiam, enim incidunt quisquam maxime neque
-                              eaque.</p>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-              </div>
-              <!-- /.col-lg-8 -->
-              <div class="col-lg-4">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                  </div>
-                  <!-- /.panel-heading -->
-                  <div class="panel-body">
-                    <div class="list-group">
-                      <a href="#" class="list-group-item">
-                        <i class="fa fa-comment fa-fw"></i> New Comment
-                        <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                        </span>
-                      </a>
-                      <a href="#" class="list-group-item">
-                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                        <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                        </span>
-                      </a>
-                      <a href="#" class="list-group-item">
-                        <i class="fa fa-envelope fa-fw"></i> Message Sent
-                        <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                        </span>
-                      </a>
-                      <a href="#" class="list-group-item">
-                        <i class="fa fa-tasks fa-fw"></i> New Task
-                        <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                        </span>
-                      </a>
-                      <a href="#" class="list-group-item">
-                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                        <span class="pull-right text-muted small"><em>11:32 AM</em>
-                        </span>
-                      </a>
-                      <a href="#" class="list-group-item">
-                        <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                        <span class="pull-right text-muted small"><em>11:13 AM</em>
-                        </span>
-                      </a>
-                      <a href="#" class="list-group-item">
-                        <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                        <span class="pull-right text-muted small"><em>10:57 AM</em>
-                        </span>
-                      </a>
-                      <a href="#" class="list-group-item">
-                        <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                        <span class="pull-right text-muted small"><em>9:49 AM</em>
-                        </span>
-                      </a>
-                      <a href="#" class="list-group-item">
-                        <i class="fa fa-money fa-fw"></i> Payment Received
-                        <span class="pull-right text-muted small"><em>Yesterday</em>
-                        </span>
-                      </a>
-                    </div>
-                    <!-- /.list-group -->
-                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                  </div>
-                  <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
-                  </div>
-                  <div class="panel-body">
-                    <div id="morris-donut-chart"></div>
-                    <a href="#" class="btn btn-default btn-block">View Details</a>
-                  </div>
-                  <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-                <div class="chat-panel panel panel-default">
-                  <div class="panel-heading">
-                    <i class="fa fa-comments fa-fw"></i>
-                    Chat
-                    <div class="btn-group pull-right">
-                      <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-chevron-down"></i>
-                      </button>
-                      <ul class="dropdown-menu slidedown">
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-refresh fa-fw"></i> Refresh
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-check-circle fa-fw"></i> Available
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-times fa-fw"></i> Busy
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-clock-o fa-fw"></i> Away
-                          </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-sign-out fa-fw"></i> Sign Out
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <!-- /.panel-heading -->
-                  <div class="panel-body">
-                    <ul class="chat">
-                      <li class="left clearfix">
-                        <span class="chat-img pull-left">
-                          <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
-                        </span>
-      
-                        <div class="chat-body clearfix">
-                          <div class="header">
-                            <strong class="primary-font">Jack Sparrow</strong>
-                            <small class="pull-right text-muted">
-                              <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
-                            </small>
-                          </div>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                            ornare dolor, quis ullamcorper ligula sodales.
-                          </p>
-                        </div>
-                      </li>
-                      <li class="right clearfix">
-                        <span class="chat-img pull-right">
-                          <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
-                        </span>
-      
-                        <div class="chat-body clearfix">
-                          <div class="header">
-                            <small class=" text-muted">
-                              <i class="fa fa-clock-o fa-fw"></i> 13 mins ago
-                            </small>
-                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                          </div>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                            ornare dolor, quis ullamcorper ligula sodales.
-                          </p>
-                        </div>
-                      </li>
-                      <li class="left clearfix">
-                        <span class="chat-img pull-left">
-                          <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
-                        </span>
-      
-                        <div class="chat-body clearfix">
-                          <div class="header">
-                            <strong class="primary-font">Jack Sparrow</strong>
-                            <small class="pull-right text-muted">
-                              <i class="fa fa-clock-o fa-fw"></i> 14 mins ago
-                            </small>
-                          </div>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                            ornare dolor, quis ullamcorper ligula sodales.
-                          </p>
-                        </div>
-                      </li>
-                      <li class="right clearfix">
-                        <span class="chat-img pull-right">
-                          <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
-                        </span>
-      
-                        <div class="chat-body clearfix">
-                          <div class="header">
-                            <small class=" text-muted">
-                              <i class="fa fa-clock-o fa-fw"></i> 15 mins ago
-                            </small>
-                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                          </div>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                            ornare dolor, quis ullamcorper ligula sodales.
-                          </p>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- /.panel-body -->
-                  <div class="panel-footer">
-                    <div class="input-group">
-                      <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                      <span class="input-group-btn">
-                        <button class="btn btn-warning btn-sm" id="btn-chat">
-                          Send
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                  <!-- /.panel-footer -->
-                </div>
-                <!-- /.panel .chat-panel -->
-              </div>
-              <!-- /.col-lg-4 -->
-            </div>
-            <!-- /.row -->
           </div>
-          <!-- /.container-fluid -->
-        </div>
+          <br>
+          <!-- /.row -->
+          <div class="row">
+            <div class="col-lg-8">
+              {{-- Content --}}
+              <div style="margin-left: 5%">
+                @yield('content')
+                <br><br><br>
+              </div>
+              <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-8 -->
+            <div class="col-lg-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <i class="fa fa-bell fa-fw"></i> Berita Terbaru
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                  <div class="list-group">
+                    @foreach($beritas as $data)
+                    <a href="{{ url('file/berita')}}/{{ $data['file'] }}" class="list-group-item">
+                      <i class="fa fa-tasks fa-fw"></i> {{$data['namaBerita']}}
+                    </a>
+                    <br>
+                    @endforeach
+                  </div>
+                  </div>
+              </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.col-lg-4 -->
+          </div>
+          <!-- /.row -->
+        <!-- /.container-fluid -->
       </div>
     </div>
   </div>
@@ -447,5 +380,4 @@
   <script src="{{ url('./newasset/js/startmin.js')}}"></script>
 
 </body>
-
 </html>

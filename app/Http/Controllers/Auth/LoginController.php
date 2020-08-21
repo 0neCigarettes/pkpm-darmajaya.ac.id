@@ -29,20 +29,13 @@ class LoginController extends Controller
     // protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo()
     {
-        // if (auth()->user()->level == 1) {
-        //     return '/admin';
-        // } else 
         if (auth()->user()->level == 2) {
             return '/sekjur';
         } else if (auth()->user()->level == 3) {
             return '/mahasiswa';
         }
-        // if (auth()->user()->level == 2) {
-        //     return '/sekjur';
-        // } else if (auth()->user()->level == 3) {
-        //     return '/mahasiswa';
-        // }
-        return RouteServiceProvider::HOME;
+        return '/admin';
+        // return RouteServiceProvider::HOME;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\panduanModel;
+use App\observasiModel;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,15 @@ class panduanContrller extends Controller
         }
     }
 
+    public function observasi()
+    {
+        $data = observasiModel::get();
+        if (auth()->user()->level == 1) {
+            return view('admin.observasiView')->with(['datas' => $data]);
+        } else if (auth()->user()->level == 2) {
+            // return view('sekjur.uploadPanduanpkpm')->with(['datas' => $data]);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -53,6 +63,42 @@ class panduanContrller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function addForm(Request $request)
+    {
+        $validator = Validator::make($request->all(), $this->rulesGambar, $this->messages);
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $data = $request->all();
+            $file = $request->file('file');
+            $nama = Str::random(16) . round(microtime(true)) . '.' . $file->guessExtension();
+            $data['idUser'] = Auth::user()->id;
+            $data['file'] = $nama;
+            $file->move('file/observasi', $nama);
+
+            $input = observasiModel::create($data);
+            $alert = [
+                'afterAction' => true
+            ];
+            if ($input) {
+                $alert['msg'] = 'Berhasil Upload';
+                $alert['sukses'] = true;
+            } else {
+                $alert['msg'] = 'Gagal Upload';
+                $alert['sukses'] = false;
+            }
+        }
+        if (auth()->user()->level == 1) {
+            return redirect()->route('observasi')->with($alert);
+        } else if (auth()->user()->level == 2) {
+            // return redirect()->route('indexPanduaninsekjur')->with($alert);
+        }
+        // return json_encode($data);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), $this->rulesGambar, $this->messages);
@@ -143,6 +189,25 @@ class panduanContrller extends Controller
             $alert['sukses'] = true;
         } else {
             $alert['msg'] = 'Terjadi Kesalahan Saat Menghapus Laporan !';
+            $alert['sukses'] = false;
+        }
+        return redirect()->back()->with($alert);
+    }
+
+    public function delete($id)
+    {
+        $fileLama = observasiModel::where('id', $id)->first()['file'];
+        $delete = observasiModel::where('id', '=', $id)
+            ->delete();
+        $alert = [
+            'afterAction' => true
+        ];
+        if ($delete) {
+            unlink('file/observasi/' . $fileLama);
+            $alert['msg'] = 'Berhasil Dihapus !';
+            $alert['sukses'] = true;
+        } else {
+            $alert['msg'] = 'Terjadi Kesalahan Saat Menghapus !';
             $alert['sukses'] = false;
         }
         return redirect()->back()->with($alert);

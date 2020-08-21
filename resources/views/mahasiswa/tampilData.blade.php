@@ -17,6 +17,7 @@
                           <th>Scan Pembayaran PKPM</th>
                           <th>Scan Pembayaran BPP</th>
                           <th>Scan Transkrip KRS</th>
+                          <th>Scan Transkrip Nilai</th>
                           <th>Nomo HP</th>
                           <th>Ukuran Kaos</th>
                           <th>Status</th>
@@ -29,16 +30,20 @@
                           <td>{{ $data['npm'] }}</td>
                           <td>{{ $data['jurusan'] }}</td>
                           <td align="center">
-                            <img src="{{ url('file/scanPKPM') }}/{{$data['pembayaranPKPM']}}" alt="" width="300">
+                            <img src="{{ url('file/scanPKPM') }}/{{$data['pembayaranPKPM']}}" alt="" width="200">
                             <a href="{{ asset('file/scanPKPM')}}/{{$data['pembayaranPKPM']}}" class="btn btn-primary" style="margin-top: 10px">Lihat</a>
                           </td>
                           <td align="center">
-                            <img src="{{ url('file/scanBPP') }}/{{$data['pembayaranBPP']}}" alt="" width="300">
+                            <img src="{{ url('file/scanBPP') }}/{{$data['pembayaranBPP']}}" alt="" width="200">
                             <a href="{{ asset('file/scanBPP')}}/{{$data['pembayaranBPP']}}" class="btn btn-primary" style="margin-top: 10px">Lihat</a>
                           </td>
                           <td align="center">
-                            <img src="{{ url('file/scanKrs') }}/{{$data['transkripKRS']}}" alt="" width="300">
+                            <img src="{{ url('file/scanKrs') }}/{{$data['transkripKRS']}}" alt="" width="200">
                             <a href="{{ asset('file/scanKrs')}}/{{$data['transkripKRS']}}" class="btn btn-primary" style="margin-top: 10px">Lihat</a>
+                          </td>
+                          <td align="center">
+                            <img src="{{ url('file/scanNilai') }}/{{$data['transkripNilai']}}" alt="" width="200">
+                            <a href="{{ asset('file/scanNilai')}}/{{$data['transkripNilai']}}" class="btn btn-primary" style="margin-top: 10px">Lihat</a>
                           </td>
                           <td>{{ $data['nomorHp'] }}</td>
                           <td>{{ $data['ukuranKaos'] }}</td>

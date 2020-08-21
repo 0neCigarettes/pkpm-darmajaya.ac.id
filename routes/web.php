@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 //guest akses
-Route::get('/', 'guestController@index')->name('guestIndex');
+Route::get('/', 'guestController@index')->name('berita');
+Route::get('/kkn-fakultas', 'guestController@kkn')->name('kkn');
+Route::get('/pkpm', 'guestController@pkpm')->name('pkpm');
+Route::get('/kontak', 'guestController@kontak')->name('kontak');
+Route::get('/observasi', 'guestController@observasi')->name('observasiInGuest');
 
 
 Route::get('/login', function () {
@@ -31,7 +35,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'ceklevel:1']], function () {
 
     //mahasiswa daftar
-    Route::get('/home', 'adminController@index')->name('cekRegistrasiPKPM');
+    Route::get('/admin', 'adminController@index')->name('cekRegistrasiPKPM');
     Route::get('/admin/konfirmasi_peserta', 'adminController@konfirmasiView')->name('konfirmasiView');
     Route::get('/admin/konfirmasi_peserta/konfirmasi/{id}', 'adminController@konfirmasiPendaftaran')->name('konfirmasiPendaftaran');
 
@@ -52,6 +56,11 @@ Route::group(['middleware' => ['auth', 'ceklevel:1']], function () {
     //add akun sekjur
     Route::get('/admin/add_sekjur', 'sekjurController@index')->name('addIndex');
     Route::post('/admin/add_sekjur/add', 'sekjurController@store')->name('add');
+
+    //observasi
+    Route::get('/admin/observasi', 'panduanContrller@observasi')->name('observasi');
+    Route::post('/admin/observasi/input', 'panduanContrller@addForm')->name('input');
+    Route::get('/admin/observasi/delete/{id}', 'panduanContrller@delete')->name('delete');
 });
 
 //sekjur
@@ -67,6 +76,12 @@ Route::group(['middleware' => ['auth', 'ceklevel:2']], function () {
     Route::post('/sekjur/kelompok_mahasiswa/add', 'kelompokController@kelompok')->name('addKelompok');
     Route::get('/sekjur/kelompok_mahasiswa/input/{id}', 'kelompokController@getPesertaByKelompok')->name('getAllPeserta');
     Route::get('/sekjur/kelompok_mahasiswa/peserta', 'kelompokController@getPesertaNonKelompok')->name('getPesertaNonKelompok');
+    Route::get('/sekjur/kelompok_mahasiswa/peserta/add/{idkelompok}', 'kelompokController@addPeserta')->name('addPeserta');
+    Route::get('/sekjur/kelompok_mahasiswa/peserta/addtokelompok/{idkelompok}/{idpeserta}', 'kelompokController@tambahpeserta')->name('tambah');
+    Route::get('/sekjur/kelompok_mahasiswa/peserta/cetakPdf', 'kelompokController@pdf')->name('cetakPDF');
+
+    //hapus peserta
+    Route::get('/sekjur/kelompok_mahasiswa/peserta/delete/{id}/{idKelompok}', 'kelompokController@destroy')->name('deleteInKelompok');
 
 
     //mahasiswa laporan

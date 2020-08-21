@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\pesertaModel;
 use App\laporanModel;
 use App\User;
+use App\observasiModel;
 use Illuminate\Http\Request;
 
 class adminController extends Controller
@@ -16,10 +17,14 @@ class adminController extends Controller
      */
     public function index()
     {
+        $cekJurusanSekjur = auth()->user()->jurusan;
         $totalPeserta = pesertaModel::count();
         $belumTerkonfirmasi = pesertaModel::where('status', 1)->count();
         $terkonfirmasi = pesertaModel::where('status', 2)->count();
+
         // // $fileLama = laporanModel::where('id', $id)->first()['laporan'];
+
+        $dataToSejur = pesertaModel::where('jurusan', $cekJurusanSekjur)->get();
         $data = pesertaModel::get();
         if (auth()->user()->level == 1) {
             return view('admin.index')->with([
@@ -30,13 +35,13 @@ class adminController extends Controller
             ]);
         } else if (auth()->user()->level == 2) {
             return view('sekjur.index')->with([
-                'datas' => $data,
+                'datas' => $dataToSejur,
                 'a' => $totalPeserta,
                 'b' => $terkonfirmasi,
                 'c' => $belumTerkonfirmasi,
             ]);
         }
-        // return json_encode($totalPeserta);
+        return json_encode($dataToSejur);
     }
 
     public function konfirmasiView()

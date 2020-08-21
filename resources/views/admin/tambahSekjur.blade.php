@@ -23,7 +23,18 @@
     </div>
     <div class="panel-body">
       <form method="POST" action="{{ route('add')}}">
-        @csrf
+                        @csrf
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label>Username (NIP)</label>
+              <input required class="form-control" name="username" type="text"  placeholder="Username/NIP">
+              @error('username')
+                <span class="invalid-feedback" role="alert" style="background: #fb0601;">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+          </div>
           <div class="col-lg-12">
             <div class="form-group">
               <label>Nama Sekjur</label>
@@ -35,11 +46,20 @@
               @enderror
             </div>
           </div>
-          <div class="col-lg-12">
+          <div class="col-md-12">
             <div class="form-group">
-              <label>Username (NIP)</label>
-              <input required class="form-control" name="username" type="text"  placeholder="Username/NIP">
-              @error('username')
+              <label>Jurusan</label>
+              <select required name="jurusan" class="form-control @error('jurusan') is-invalid @enderror" value="{{ old('jurusan') }}" required>
+                <option value="">--Pilih Jurusan--</option>
+                <option value="Tehnik Informatika">Tehnik Informatika</option>
+                <option value="Sistem Informasi">Sistem Informasi</option>
+                <option value="Sistem Komputer">Sistem Komputer</option>
+                <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
+                <option value="Manajemen">Manajemen</option>
+                <option value="Akuntansi">Akuntansi</option>
+                <option value="Bisnis Digital">Bisnis Digital</option>
+              </select>
+              @error('jurusan')
                 <span class="invalid-feedback" role="alert" style="background: #fb0601;">
                     <strong>{{ $message }}</strong>
                 </span>

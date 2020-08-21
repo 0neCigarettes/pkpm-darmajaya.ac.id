@@ -9,7 +9,7 @@
 				<div class="panel-heading">
 						<div class="row">
 								<div class="col-xs-3">
-										<i class="fa fa-comments fa-5x"></i>
+										<i class="fa fa-users fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
 										<div class="huge">{{$a}}</div>
@@ -34,7 +34,7 @@
 				<div class="panel-heading">
 						<div class="row">
 								<div class="col-xs-3">
-										<i class="fa fa-tasks fa-5x"></i>
+										<i class="fa fa-users fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
 										<div class="huge">{{$b}}</div>
@@ -59,7 +59,7 @@
 				<div class="panel-heading">
 						<div class="row">
 								<div class="col-xs-3">
-										<i class="fa fa-support fa-5x"></i>
+										<i class="fa fa-users fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
 										<div class="huge">{{$c}}</div>
@@ -94,6 +94,7 @@
 												<th>Scan Pembayaran PKPM</th>
 												<th>Scan Pembayaran BPP</th>
 												<th>Scan Transkrip KRS</th>
+												<th>Scan Transkrip Nilai</th>
 												<th>Nomor HP</th>
 												<th>Ukuran Kaos</th>
 												<th>Status</th>
@@ -113,6 +114,9 @@
 											</td>
 											<td align="center">
 												<a href="{{url('file/scanKrs')}}/{{ $data['transkripKRS']}}" class="btn btn-warning">lihat</a>
+											</td>
+											<td align="center">
+												<a href="{{url('file/scanNIlai')}}/{{ $data['transkripNilai']}}" class="btn btn-warning">lihat</a>
 											</td>
 											<td>{{ $data['nomorHp']}}</td>
 											<td>{{ $data['ukuranKaos']}}</td>

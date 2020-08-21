@@ -122,17 +122,17 @@
           <div class="col-lg-4">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                <i class="fa fa-bell fa-fw"></i> Berita Terbaru
               </div>
               <!-- /.panel-heading -->
               <div class="panel-body">
+                @foreach ($beritas as $data)
                 <div class="list-group">
-                  <a href="#" class="list-group-item">
-                    <i class="fa fa-download fa-fw"></i> Download form Nilai PKPM
+                  <a href="{{ asset('file/berita')}}/{{$data['file']}}" class="list-group-item">
+                    <i class="fa fa-download fa-fw"></i> {{$data['namaBerita']}}
                   </a>
                 </div>
-                <!-- /.list-group -->
-                <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                @endforeach
               </div>
               <!-- /.panel-body -->
             </div>

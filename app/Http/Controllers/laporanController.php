@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\laporanModel;
+use App\beritaModel;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,7 @@ class laporanController extends Controller
      */
     public function index()
     {
+        $berita = beritaModel::all();
         $userActive = Auth::user()->id;
         $cekUser = User::join('tb_uploadlaporanpkpm', 'users.id', '=', 'tb_uploadlaporanpkpm.idUser')
             ->where('users.id', '=', $userActive)->count();
@@ -40,7 +42,11 @@ class laporanController extends Controller
             $resposnse['msg'] = 'Anda Belum Mendaftar';
             $resposnse['status'] = false;
         }
-        return view('mahasiswa.uploadLaporanPKPM')->with(['resposnse' => $resposnse]);
+        return view('mahasiswa.uploadLaporanPKPM')
+            ->with([
+                'resposnse' => $resposnse,
+                'beritas' => $berita
+            ]);
     }
 
     /**

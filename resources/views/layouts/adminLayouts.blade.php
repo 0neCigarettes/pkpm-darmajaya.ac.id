@@ -102,6 +102,9 @@
               <a href="{{ route('indexBerita')}}"><i class="fa fa-upload fa-fw"></i> Upload Berita PKPM</a>
             </li>
             <li>
+              <a href="{{ route('observasi')}}"><i class="fa fa-upload fa-fw"></i> Upload panduan observasi</a>
+            </li>
+            <li>
               <a href="{{ route('addIndex')}}"><i class="fa fa-edit fa-fw"></i> Tambah Akun Sekjur</a>
             </li>
           </ul>

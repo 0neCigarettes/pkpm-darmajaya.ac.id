@@ -1,24 +1,11 @@
 @extends('layouts.sekjurLayouts')
 @section('header_content')
-  Data Mahasiswa/<small><b>Kelompok [ {{$dataKelompok['namaKelompok']}} ]</b></small>
+  Data Mahasiswa
 @endsection
 @section('content')
-@if (session('afterAction'))
-  @if (session('sukses'))
-    <div class="alert alert-info alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <strong>{{ session('msg')}}</strong>
-    </div>
-  @else
-    <div class="alert alert-danger alert-dismissible">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <strong>{{ session('msg')}}</strong>
-    </div>
-  @endif
-@endif
   <div class="panel panel-default">
       <div class="panel-heading">
-          <a href="{{ route('addPeserta', $idKelompok ) }}" class="btn btn-primary"> Tambah peserta</a>
+        <h3><b>Nomor Kelompok</b> [{{$dataKelompok['namaKelompok']}}] <b>Dosen Pembimbing Lapangan</b> [{{$dataKelompok['dpl']}}]</h3>
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
@@ -29,8 +16,6 @@
                           <th>NPM</th>
                           <th>Nama</th>
                           <th>Program Studi</th>
-                          <th>Dosen Pembimbing Lapangan</th>
-                          <th>Nomor Kelompok</th>
                           <th>Aksi</th>
                       </tr>
                   </thead>
@@ -40,12 +25,8 @@
                       <td>{{ $data['npm'] }}</td>
                       <td>{{ $data['nama'] }}</td>
                       <td>{{ $data['jurusan'] }}</td>
-                      <td>{{ $data['dpl'] }}</td>
-                      <td>{{ $data['namaKelompok'] }}</td>
                       <td>
-                        <a href="{{route('deleteInKelompok', [$data['idDetail'], $idKelompok])}}">
-                        <button class="btn btn-danger" onClick="return konfirmasi()">Hapus</button>
-                        </a>
+                        <a href="{{ route('tambah', [$dataKelompok['idKelompok'], $data['id']])}}" class="btn btn-primary">tambah ke kelompok ini</a>
                       </td>
                     </tr>
                     @endforeach

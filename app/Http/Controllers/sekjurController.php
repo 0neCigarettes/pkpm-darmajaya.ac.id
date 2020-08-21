@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class sekjurController extends Controller
 {
@@ -35,15 +36,15 @@ class sekjurController extends Controller
      */
     public function store(Request $request)
     {
-        // $request = $request->all();
         $sukses;
         $msg;
         if ($this->emailExist($request->input('email'))) {
             $sukses = false;
             $msg = 'Gagal Menambah Sekjur, Karena Email Sudah Digunakan.';
         } else {
-            $password = bcrypt('12345678');
-            $request->request->add(['password' => $password]);
+            // $password = bcrypt('12345678');
+            // Hash::make($data['password']),
+            $request->request->add(['password' => Hash::make($request['password']),]);
             $level = 2;
             $request->request->add(['level' => $level]);
             $insert = User::create($request->all());

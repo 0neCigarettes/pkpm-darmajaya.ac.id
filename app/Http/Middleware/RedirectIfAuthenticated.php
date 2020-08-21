@@ -20,13 +20,13 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             if (auth()->user()->level == 2) {
-                return '/sekjur';
+                return $next($request);
             } else if (auth()->user()->level == 3) {
-                return '/mahasiswa';
+                return $next($request);
+            } else {
+                return $next($request);
             }
-            return redirect(RouteServiceProvider::HOME);
         }
-
         return $next($request);
     }
 }

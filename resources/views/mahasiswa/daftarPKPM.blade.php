@@ -101,6 +101,17 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
+              <label>Scan Transkrip Nilai</label>
+              <input type="file" name="transkripNilai" class="form-control @error('transkripNilai') is-invalid @enderror" value="{{ old('transkripNilai') }}" required>
+              @error('transkripNilai')
+                <span class="invalid-feedback" role="alert" style="background: #fb0601;">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
               <label>Nomor Hp</label>
               <input required class="form-control @error('nomorHP') is-invalid @enderror" value="{{ old('nomorHP') }}" name="nomorHP" type="text" placeholder="Nomor HP">
               @error('nomorHP')
