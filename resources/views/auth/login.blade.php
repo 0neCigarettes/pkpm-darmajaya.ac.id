@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 
-        <title>Startmin - Bootstrap Admin Theme</title>
+        <title>PKPM@Darmajaya.ac.id</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="{{ url('./newasset/css/bootstrap.min.css')}}" rel="stylesheet" />

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\pesertaModel;
 use App\kelompokModel;
+use App\User;
 use PDF;
 use App\detailKelompokModel;
 use Illuminate\Http\Request;
@@ -20,24 +21,35 @@ class kelompokController extends Controller
 	{
 		$allKelompok = detailkelompokModel::join('tb_kelompok', 'tb_detail_kelompok.idKelompok', '=', 'tb_kelompok.idKelompok')
 			->join('tb_pesertapkpm', 'tb_detail_kelompok.idPeserta', '=', 'tb_pesertapkpm.id')
+			->join('users', 'tb_kelompok.dpl', '=', 'users.id')
 			->select(
 				'tb_pesertapkpm.npm',
 				'tb_pesertapkpm.nama',
 				'tb_pesertapkpm.jurusan',
 				'tb_kelompok.namaKelompok',
-				'tb_kelompok.dpl',
+				'users.name AS dpl',
 				'tb_kelompok.namaTempat'
-			)->orderBy('tb_kelompok.namaKelompok')->get();
+			)->orderBy('tb_kelompok.namaKelompok')->paginate(5);
 
-		$nokel = rand();
-		$data = kelompokModel::get();
+		$lastNokel = kelompokModel::select('namaKelompok')->orderBy('namaKelompok', 'DESC')->first();
+		$a = $lastNokel['namaKelompok'];
+		$nokel = (int) $a + 1;
+		$data = kelompokModel::join('users', 'tb_kelompok.dpl', '=', 'users.id')
+			->select('tb_kelompok.idKelompok', 'tb_kelompok.namaKelompok', 'users.name', 'tb_kelompok.namaTempat')->paginate(5);
+
+		$cekDpl = kelompokModel::pluck('dpl')->all();
+		// $data = pesertaModel::whereNotIn('id', $cekData)->where('status', '>', 0)->select('*')->get();
+		$dataDPL = User::whereNotIn('id', $cekDpl)->where('level', '=', 4)->select('id', 'name')->get();
+
 		return view('sekjur.indexKelompok')
 			->with([
 				'datas' => $data,
 				'no' => $nokel,
-				'dataKelompoks' => $allKelompok
+				'dataKelompoks' => $allKelompok,
+				'dataDPLs' => $dataDPL
 			]);
-		// return json_encode($allKelompok);
+		return json_encode($allKelompok);
+		// return json_encode($nokel);
 	}
 
 	public static function pdf()
@@ -45,12 +57,13 @@ class kelompokController extends Controller
 		$nama = Str::random(13) . round(microtime(true));
 		$allKelompok = detailkelompokModel::join('tb_kelompok', 'tb_detail_kelompok.idKelompok', '=', 'tb_kelompok.idKelompok')
 			->join('tb_pesertapkpm', 'tb_detail_kelompok.idPeserta', '=', 'tb_pesertapkpm.id')
+			->join('users', 'tb_kelompok.dpl', '=', 'users.id')
 			->select(
 				'tb_pesertapkpm.npm',
 				'tb_pesertapkpm.nama',
 				'tb_pesertapkpm.jurusan',
 				'tb_kelompok.namaKelompok',
-				'tb_kelompok.dpl',
+				'users.name AS dpl',
 				'tb_kelompok.namaTempat'
 			)->orderBy('tb_kelompok.namaKelompok')->get();
 
@@ -87,12 +100,13 @@ class kelompokController extends Controller
 		$dataKelompok = kelompokModel::where('idKelompok', $id)->first();
 		$data = detailkelompokModel::join('tb_kelompok', 'tb_detail_kelompok.idKelompok', '=', 'tb_kelompok.idKelompok')
 			->join('tb_pesertapkpm', 'tb_detail_kelompok.idPeserta', '=', 'tb_pesertapkpm.id')
+			->join('users', 'tb_kelompok.dpl', '=', 'users.id')
 			->select(
 				'tb_detail_kelompok.idDetail',
 				'tb_pesertapkpm.npm',
 				'tb_pesertapkpm.nama',
 				'tb_pesertapkpm.jurusan',
-				'tb_kelompok.dpl',
+				'users.name AS dpl',
 				'tb_kelompok.namaKelompok'
 			)
 			->where('tb_kelompok.idKelompok', $id)
@@ -130,7 +144,8 @@ class kelompokController extends Controller
 
 	public function addPeserta($idkelompok)
 	{
-		$dataKelompok = kelompokModel::where('idKelompok', $idkelompok)->first();
+		$dataKelompok = kelompokModel::join('users', 'tb_kelompok.dpl', '=', 'users.id')
+			->where('idKelompok', $idkelompok)->select('tb_kelompok.idKelompok', 'tb_kelompok.namaKelompok', 'users.name AS dpl')->first();
 		$cekData = detailkelompokModel::pluck('idPeserta')->all();
 		$data = pesertaModel::whereNotIn('id', $cekData)->where('status', '>', 0)->select('*')->get();
 		// var_dump($idkelompok);
@@ -154,7 +169,7 @@ class kelompokController extends Controller
 		}
 
 		return redirect()->back()->with($alert);
-		// return json_encode($data);
+		return json_encode($data);
 	}
 	public function store(Request $request)
 	{

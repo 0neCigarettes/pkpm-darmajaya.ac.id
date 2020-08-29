@@ -70,7 +70,7 @@
 
     /*pengaturan durasi lama tampil gambar bisa di atur di bawah ini*/
     animation-name:slider;
-    animation-duration:8s;
+    animation-duration:20s;
     animation-timing-function: ease-in-out;
     animation-iteration-count:infinite;
     -webkit-animation-name:slider;
@@ -348,8 +348,9 @@
                     </a>
                     <br>
                     @endforeach
+                    {{$beritas->links()}}
                   </div>
-                  </div>
+                </div>
               </div>
                 <!-- /.panel-body -->
             </div>

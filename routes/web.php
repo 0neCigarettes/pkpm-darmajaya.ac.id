@@ -57,6 +57,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:1']], function () {
     Route::get('/admin/add_sekjur', 'sekjurController@index')->name('addIndex');
     Route::post('/admin/add_sekjur/add', 'sekjurController@store')->name('add');
 
+    //add dpl
+    Route::get('/admin/add_dpl', 'adminController@addDplView')->name('addDplView');
+    Route::post('/admin/add_dpl/insert', 'adminController@addDpl')->name('addDpl');
+
     //observasi
     Route::get('/admin/observasi', 'panduanContrller@observasi')->name('observasi');
     Route::post('/admin/observasi/input', 'panduanContrller@addForm')->name('input');

@@ -50,10 +50,10 @@ class sekjurController extends Controller
             $insert = User::create($request->all());
 
             if ($insert) {
-                $msg = 'Berhasil Menambah Admin.';
+                $msg = 'Berhasil Menambah Sekjur !';
                 $sukses = true;
             } else {
-                $msg = 'Gagal Menambah Admin.';
+                $msg = 'Gagal Menambah Sekjur !';
                 $sukses = false;
             }
         }

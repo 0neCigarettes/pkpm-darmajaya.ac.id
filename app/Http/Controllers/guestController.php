@@ -16,38 +16,38 @@ class guestController extends Controller
      */
     public function index()
     {
-        $data = panduanModel::all();
-        $berita = beritaModel::get();
-        return view('guest.berita')->with(['datas' => $data, 'beritas' => $berita]);
+        $panduan = panduanModel::paginate(7);
+        $berita = beritaModel::paginate(7);
+        return view('guest.berita')->with(['datas' => $panduan, 'beritas' => $berita]);
     }
 
     public function observasi()
     {
-        $observasi = observasiModel::get();
-        $data = panduanModel::all();
-        $berita = beritaModel::get();
-        return view('guest.observasi')->with(['observasis' => $observasi, 'datas' => $data, 'beritas' => $berita]);
+        $observasi = observasiModel::paginate(7);
+        $panduan = panduanModel::paginate(7);
+        $berita = beritaModel::paginate(7);
+        return view('guest.observasi')->with(['observasis' => $observasi, 'datas' => $panduan, 'beritas' => $berita]);
     }
 
     public function kkn()
     {
-        $data = panduanModel::all();
-        $berita = beritaModel::get();
+        $data = panduanModel::paginate(7);
+        $berita = beritaModel::paginate(7);
         return view('guest.kknF')->with(['datas' => $data, 'beritas' => $berita]);
     }
 
     public function kontak()
     {
-        $data = panduanModel::all();
-        $berita = beritaModel::get();
-        return view('guest.kontak')->with(['datas' => $data, 'beritas' => $berita]);
+        $panduan = panduanModel::paginate(7);
+        $berita = beritaModel::paginate(7);
+        return view('guest.kontak')->with(['datas' => $panduan, 'beritas' => $berita]);
     }
 
     public function pkpm()
     {
-        $data = panduanModel::all();
-        $berita = beritaModel::get();
-        return view('guest.pkpm')->with(['datas' => $data, 'beritas' => $berita]);
+        $panduan = panduanModel::paginate(7);
+        $berita = beritaModel::paginate(7);
+        return view('guest.pkpm')->with(['datas' => $panduan, 'beritas' => $berita]);
     }
 
     /**

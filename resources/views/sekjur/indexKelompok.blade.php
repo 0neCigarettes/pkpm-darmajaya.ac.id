@@ -37,7 +37,7 @@
                     @foreach($datas as $data)
                     <tr>
                       <td>{{ $data['namaKelompok'] }}</td>
-                      <td>{{ $data['dpl'] }}</td>
+                      <td>{{ $data['name'] }}</td>
                       <td>{{ $data['namaTempat'] }}</td>
                       <td>
                         <a href="{{ route('getAllPeserta', $data['idKelompok'])}}" class="btn btn-primary">Lihat Peserta</a>
@@ -46,6 +46,7 @@
                     @endforeach
                   </tbody>
               </table>
+                  {{$datas->links()}}
           </div>
           <!-- /.table-responsive -->
       </div>
@@ -73,7 +74,12 @@
                     </div>
                     <div class="form-group">
                       <label>Dosen Pembimbing Lapangan</label>
-                      <input type="text" name="dpl" class="form-control" placeholder="Dosen Pembimbing Lapangan" required>
+                        <select required name="dpl" class="form-control @error('dpl') is-invalid @enderror" required>
+                          <option value="">--Pilih Jurusan--</option>
+                        @foreach($dataDPLs as $data)
+                          <option value="{{ $data['id']}}">{{ $data['name']}}</option>
+                        @endforeach
+                      </select>
                     </div>
                     <div class="form-group">
                       <label>nama Desa/Tempat</label>
@@ -124,6 +130,7 @@
                     @endforeach
                   </tbody>
               </table>
+              {{$dataKelompoks->links()}}
           </div>
           <!-- /.table-responsive -->
       </div>

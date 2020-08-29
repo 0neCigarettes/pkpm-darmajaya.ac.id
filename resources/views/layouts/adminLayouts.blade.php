@@ -107,6 +107,9 @@
             <li>
               <a href="{{ route('addIndex')}}"><i class="fa fa-edit fa-fw"></i> Tambah Akun Sekjur</a>
             </li>
+            <li>
+              <a href="{{ route('addDplView')}}"><i class="fa fa-edit fa-fw"></i> Tambah Akun DPL</a>
+            </li>
           </ul>
         </div>
       </div>

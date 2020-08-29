@@ -7,6 +7,7 @@ use App\laporanModel;
 use App\User;
 use App\observasiModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class adminController extends Controller
 {
@@ -15,6 +16,54 @@ class adminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
+    public function addDplView()
+    {
+        return view('admin.addDpl');
+    }
+
+    public function addDpl(Request $request)
+    {
+        $sukses;
+        $msg;
+        if ($this->emailExist($request->input('email'))) {
+            $sukses = false;
+            $msg = 'Gagal Menambah DPL, Karena Email Sudah Digunakan.';
+        } else {
+            // $password = bcrypt('12345678');
+            // Hash::make($data['password']),
+            $request->request->add(['password' => Hash::make($request['password']),]);
+            $level = 4;
+            $request->request->add(['level' => $level]);
+            $insert = User::create($request->all());
+
+            if ($insert) {
+                $msg = 'Berhasil Menambah DPL !';
+                $sukses = true;
+            } else {
+                $msg = 'Gagal Menambah DPL !';
+                $sukses = false;
+            }
+        }
+        return redirect()->back()->with([
+            'afterAction' => true,
+            'msg' => $msg,
+            'sukses' => $sukses
+        ]);
+        // return json_encode($request->all());
+    }
+    public function emailExist($email)
+    {
+        $cek = User::where('email', '=', $email)->first();
+        if ($cek == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function index()
     {
         $cekJurusanSekjur = auth()->user()->jurusan;
@@ -46,12 +95,14 @@ class adminController extends Controller
 
     public function konfirmasiView()
     {
+        $cekJurusanSekjur = auth()->user()->jurusan;
+        $datas = pesertaModel::where('status', 1)->where('jurusan', $cekJurusanSekjur)->get();
         $data = pesertaModel::where('status', 1)->get();
         // return json_encode($data);
         if (auth()->user()->level == 1) {
             return view('admin.konfirmasiPeserta')->with(['datas' => $data]);
         } else if (auth()->user()->level == 2) {
-            return view('sekjur.konfirmasiPeserta')->with(['datas' => $data]);
+            return view('sekjur.konfirmasiPeserta')->with(['datas' => $datas]);
         }
     }
 
