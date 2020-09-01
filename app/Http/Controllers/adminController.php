@@ -54,6 +54,7 @@ class adminController extends Controller
         ]);
         // return json_encode($request->all());
     }
+
     public function emailExist($email)
     {
         $cek = User::where('email', '=', $email)->first();

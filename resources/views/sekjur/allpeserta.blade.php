@@ -26,7 +26,7 @@
                       <td>{{ $data['nama'] }}</td>
                       <td>{{ $data['jurusan'] }}</td>
                       <td>
-                        <a href="{{ route('tambah', [$dataKelompok['idKelompok'], $data['id']])}}" class="btn btn-primary">tambah ke kelompok ini</a>
+                        <a href="{{ route('tambah', [$dataKelompok['idKelompok'], $data['id'], $dataKelompok['idDpl']])}}" class="btn btn-primary">tambah ke kelompok ini</a>
                       </td>
                     </tr>
                     @endforeach

@@ -38,7 +38,6 @@ class kelompokController extends Controller
 			->select('tb_kelompok.idKelompok', 'tb_kelompok.namaKelompok', 'users.name', 'tb_kelompok.namaTempat')->paginate(5);
 
 		$cekDpl = kelompokModel::pluck('dpl')->all();
-		// $data = pesertaModel::whereNotIn('id', $cekData)->where('status', '>', 0)->select('*')->get();
 		$dataDPL = User::whereNotIn('id', $cekDpl)->where('level', '=', 4)->select('id', 'name')->get();
 
 		return view('sekjur.indexKelompok')
@@ -48,8 +47,6 @@ class kelompokController extends Controller
 				'dataKelompoks' => $allKelompok,
 				'dataDPLs' => $dataDPL
 			]);
-		return json_encode($allKelompok);
-		// return json_encode($nokel);
 	}
 
 	public static function pdf()
@@ -69,13 +66,6 @@ class kelompokController extends Controller
 
 		$pdf = PDF::loadView('sekjur/cetakPDF', ['datas' => $allKelompok], [])->setPaper('a4', 'potrait');
 		return $pdf->download($nama . '.pdf');
-
-		// return view('sekjur.cetakPDF');
-		// $pdf = PDF::loadView('sekjur/cetakPDF');
-		// $pdf = PDF::loadView('sekjur.cetakPDF', ['a' => $allKelompok]);
-		// return $pdf->stream('dafatar_peserta.pdf', array('Attachments' => false))->header('Content-Type', 'application/pdf');
-		// return $pdf->stream();
-		// return json_encode($allKelompok);
 	}
 
 	/**
@@ -111,7 +101,6 @@ class kelompokController extends Controller
 			)
 			->where('tb_kelompok.idKelompok', $id)
 			->get();
-		// return json_encode($data);
 
 		return view('sekjur.viewInputPeserta')->with([
 			'datas' => $data,
@@ -120,8 +109,11 @@ class kelompokController extends Controller
 		]);
 	}
 
-	public function tambahpeserta($idkelompok, $idpeserta)
+	public function tambahpeserta($idkelompok, $idpeserta, $idDpl)
 	{
+
+		//insert id dpl to peserta
+
 
 		$insert = detailkelompokModel::create([
 			'idKelompok' => $idkelompok,
@@ -145,11 +137,22 @@ class kelompokController extends Controller
 	public function addPeserta($idkelompok)
 	{
 		$dataKelompok = kelompokModel::join('users', 'tb_kelompok.dpl', '=', 'users.id')
-			->where('idKelompok', $idkelompok)->select('tb_kelompok.idKelompok', 'tb_kelompok.namaKelompok', 'users.name AS dpl')->first();
+			->where('idKelompok', $idkelompok)
+			->select(
+				'tb_kelompok.idKelompok',
+				'tb_kelompok.namaKelompok',
+				'tb_kelompok.dpl AS idDpl',
+				'users.name AS dpl'
+			)->first();
+
 		$cekData = detailkelompokModel::pluck('idPeserta')->all();
 		$data = pesertaModel::whereNotIn('id', $cekData)->where('status', '>', 0)->select('*')->get();
-		// var_dump($idkelompok);
-		return view('sekjur.allpeserta')->with(['datas' => $data, 'idkelompok' => $idkelompok, 'dataKelompok' => $dataKelompok]);
+		return view('sekjur.allpeserta')
+			->with([
+				'datas' => $data,
+				'idkelompok' => $idkelompok,
+				'dataKelompok' => $dataKelompok
+			]);
 	}
 
 	public function kelompok(request $request)
@@ -169,8 +172,8 @@ class kelompokController extends Controller
 		}
 
 		return redirect()->back()->with($alert);
-		return json_encode($data);
 	}
+
 	public function store(Request $request)
 	{
 		//

@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:2']], function () {
     Route::get('/sekjur/kelompok_mahasiswa/input/{id}', 'kelompokController@getPesertaByKelompok')->name('getAllPeserta');
     Route::get('/sekjur/kelompok_mahasiswa/peserta', 'kelompokController@getPesertaNonKelompok')->name('getPesertaNonKelompok');
     Route::get('/sekjur/kelompok_mahasiswa/peserta/add/{idkelompok}', 'kelompokController@addPeserta')->name('addPeserta');
-    Route::get('/sekjur/kelompok_mahasiswa/peserta/addtokelompok/{idkelompok}/{idpeserta}', 'kelompokController@tambahpeserta')->name('tambah');
+    Route::get('/sekjur/kelompok_mahasiswa/peserta/addtokelompok/{idkelompok}/{idpeserta}/{idDpl}', 'kelompokController@tambahpeserta')->name('tambah');
     Route::get('/sekjur/kelompok_mahasiswa/peserta/cetakPdf', 'kelompokController@pdf')->name('cetakPDF');
 
     //hapus peserta
