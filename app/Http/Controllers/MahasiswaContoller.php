@@ -29,6 +29,7 @@ class MahasiswaContoller extends Controller
         'pembayaranBPP' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'transkripKRS' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         'transkripNilai' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        'transkripSks' => 'required|image|mimes:jpeg,png,jpg|max:2048',
     ];
 
     public function index()
@@ -97,20 +98,24 @@ class MahasiswaContoller extends Controller
             $file2 = $request->file('pembayaranBPP');
             $file3 = $request->file('transkripKRS');
             $file4 = $request->file('transkripNilai');
+            $file5 = $request->file('transkripSks');
             $name1 = Str::random(16) . round(microtime(true)) . '.' . $file1->guessExtension();
             $name2 = Str::random(16) . round(microtime(true)) . '.' . $file2->guessExtension();
             $name3 = Str::random(16) . round(microtime(true)) . '.' . $file3->guessExtension();
             $name4 = Str::random(16) . round(microtime(true)) . '.' . $file4->guessExtension();
+            $name5 = Str::random(16) . round(microtime(true)) . '.' . $file5->guessExtension();
 
             $file1->move('file/scanPKPM', $name1);
             $file2->move('file/scanBPP', $name2);
             $file3->move('file/scanKrs', $name3);
             $file4->move('file/scanNilai', $name4);
+            $file5->move('file/scanSks', $name5);
 
             $data['pembayaranPKPM'] = $name1;
             $data['pembayaranBPP'] = $name2;
             $data['transkripKRS'] = $name3;
             $data['transkripNilai'] = $name4;
+            $data['transkripSks'] = $name5;
             $data['idUser'] = Auth::user()->id;
             $data['nama'] = Auth::user()->name;
             $simpan = pesertaModel::create($data);

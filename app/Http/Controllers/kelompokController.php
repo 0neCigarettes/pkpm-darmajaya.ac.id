@@ -32,7 +32,12 @@ class kelompokController extends Controller
 			)->orderBy('tb_kelompok.namaKelompok')->paginate(5);
 
 		$lastNokel = kelompokModel::select('namaKelompok')->orderBy('namaKelompok', 'DESC')->first();
-		$a = $lastNokel['namaKelompok'];
+		$a;		
+		if ($lastNokel == null){
+					$a = 0;
+				}else{
+					$a = $lastNokel['namaKelompok'];
+				}
 		$nokel = (int) $a + 1;
 		$data = kelompokModel::join('users', 'tb_kelompok.dpl', '=', 'users.id')
 			->select('tb_kelompok.idKelompok', 'tb_kelompok.namaKelompok', 'users.name', 'tb_kelompok.namaTempat')->paginate(5);

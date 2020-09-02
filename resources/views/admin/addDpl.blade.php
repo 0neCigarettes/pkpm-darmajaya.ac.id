@@ -38,7 +38,7 @@
           <div class="col-lg-12">
             <div class="form-group">
               <label>Nama DPL</label>
-              <input required class="form-control" name="name" type="text"  placeholder="Nama Sekjur">
+              <input required class="form-control" name="name" type="text"  placeholder="Nama DPL">
               @error('nama')
                 <span class="invalid-feedback" role="alert" style="background: #fb0601;">
                     <strong>{{ $message }}</strong>

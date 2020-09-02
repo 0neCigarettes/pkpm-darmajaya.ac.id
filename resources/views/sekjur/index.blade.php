@@ -1,6 +1,6 @@
 @extends('layouts.sekjurLayouts')
 @section('header_content')
-	Data Mahasiswa Mendaftar
+	Data Mahasiswa {{Auth()->user()->jurusan}} Mendaftar
 @endsection
 @section('content') 
 	{{-- notif --}}

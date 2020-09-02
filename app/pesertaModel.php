@@ -18,6 +18,7 @@ class pesertaModel extends Model
         'pembayaranBPP',
         'transkripKRS',
         'transkripNilai',
+        'transkripSks',
         'nomorHP',
         'ukuranKaos',
         'status'

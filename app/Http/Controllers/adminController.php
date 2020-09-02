@@ -68,9 +68,14 @@ class adminController extends Controller
     public function index()
     {
         $cekJurusanSekjur = auth()->user()->jurusan;
+
+        $totalPesertaInsekjur = pesertaModel::where('jurusan', $cekJurusanSekjur)->count();
+        $terkonfirmasiInSekjur = pesertaModel::where('jurusan', $cekJurusanSekjur)->where('status', 2)->count();
+        $blmTrkonfirmasiInsekjur = pesertaModel::where('jurusan', $cekJurusanSekjur)->where('status', 1)->count();
+
         $totalPeserta = pesertaModel::count();
-        $belumTerkonfirmasi = pesertaModel::where('status', 1)->count();
         $terkonfirmasi = pesertaModel::where('status', 2)->count();
+        $belumTerkonfirmasi = pesertaModel::where('status', 1)->count();
 
         // // $fileLama = laporanModel::where('id', $id)->first()['laporan'];
 
@@ -86,12 +91,12 @@ class adminController extends Controller
         } else if (auth()->user()->level == 2) {
             return view('sekjur.index')->with([
                 'datas' => $dataToSejur,
-                'a' => $totalPeserta,
-                'b' => $terkonfirmasi,
-                'c' => $belumTerkonfirmasi,
+                'a' => $totalPesertaInsekjur,
+                'b' => $terkonfirmasiInSekjur,
+                'c' => $blmTrkonfirmasiInsekjur,
             ]);
         }
-        return json_encode($dataToSejur);
+        // return json_encode($dataToSejur);
     }
 
     public function konfirmasiView()

@@ -75,14 +75,14 @@
                     <div class="form-group">
                       <label>Dosen Pembimbing Lapangan</label>
                         <select required name="dpl" class="form-control @error('dpl') is-invalid @enderror" required>
-                          <option value="">--Pilih Jurusan--</option>
+                          <option value="">--Pilih DPL--</option>
                         @foreach($dataDPLs as $data)
                           <option value="{{ $data['id']}}">{{ $data['name']}}</option>
                         @endforeach
                       </select>
                     </div>
                     <div class="form-group">
-                      <label>nama Desa/Tempat</label>
+                      <label>Nama Desa/Tempat</label>
                       <input type="text" name="namaTempat" class="form-control" placeholder="Nama Tempat/Desa" required>
                     </div>
                 </div>

@@ -112,6 +112,17 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
+              <label>Scan Transkrip SKS</label>
+              <input type="file" name="transkripSks" class="form-control @error('transkripSks') is-invalid @enderror" value="{{ old('transkripSks') }}" required>
+              @error('transkripSks')
+                <span class="invalid-feedback" role="alert" style="background: #fb0601;">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
               <label>Nomor Hp</label>
               <input required class="form-control @error('nomorHP') is-invalid @enderror" value="{{ old('nomorHP') }}" name="nomorHP" type="text" placeholder="Nomor HP">
               @error('nomorHP')
@@ -161,6 +172,5 @@
       PKPM@Darmajaya.ac.id
     </div>
   </div>
-</div>
-<!-- /.col-lg-4 -->
+</div>`
 @endsection
