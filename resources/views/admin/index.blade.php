@@ -95,6 +95,7 @@
 												<th>Scan Pembayaran BPP</th>
 												<th>Scan Transkrip KRS</th>
 												<th>Scan Transkrip Nilai</th>
+												<th>Scan Transkrip SKS</th>
 												<th>Nomor HP</th>
 												<th>Ukuran Kaos</th>
 												<th>Status</th>
@@ -117,6 +118,9 @@
 											</td>
 											<td align="center">
 												<a href="{{url('file/scanNIlai')}}/{{ $data['transkripNilai']}}" class="btn btn-warning">lihat</a>
+											</td>
+											<td align="center">
+												<a href="{{url('file/scanSks')}}/{{ $data['transkripSks']}}" class="btn btn-warning">lihat</a>
 											</td>
 											<td>{{ $data['nomorHp']}}</td>
 											<td>{{ $data['ukuranKaos']}}</td>

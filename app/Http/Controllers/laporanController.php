@@ -15,12 +15,13 @@ class laporanController extends Controller
     public $messages = [
         'required' => 'Harap Isi :attribute Anda',
         'mimetypes' => 'Format file Harus PDF',
-        'file' => 'File Harus Berisi PDF',
-        'max' => 'file Tidak Boleh Lebih Dari 50 Mb'
+        'file' => 'File Harus Berisi :attribute ',
+        'max' => 'file Tidak Boleh Lebih Dari :atribute'
     ];
 
     public $rulesGambar = [
         'laporan' => 'required|file|mimetypes:application/pdf|max:51200',
+        'video' => 'required|mimetypes:video/mp4|max:1024000',
     ];
 
     /**
