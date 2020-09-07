@@ -9,6 +9,6 @@ class laporanModel extends Model
     protected $table = 'tb_uploadlaporanpkpm';
 
     protected $fillable = [
-        'idUser', 'npm', 'nama', 'laporan'
+        'idUser', 'npm', 'nama', 'laporan', 'video',
     ];
 }

@@ -102,6 +102,9 @@
               <a href="{{ route('daftarPKPM')}}" class="active"><i class="fa fa-pencil-square-o fa-fw"></i> Daftar PKPM</a>
             </li>
             <li>
+              <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i> Bimbingan Laporan PKPM</a>
+            </li>
+            <li>
               <a href="{{ route('uploadLapranPKPM')}}" class="active"><i class="fa fa-upload fa-fw"></i> Upload Laporan PKPM</a>
             </li>
           </ul>

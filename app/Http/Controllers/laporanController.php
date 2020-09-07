@@ -21,7 +21,7 @@ class laporanController extends Controller
 
     public $rulesGambar = [
         'laporan' => 'required|file|mimetypes:application/pdf|max:51200',
-        'video' => 'required|mimetypes:video/mp4|max:1024000',
+        'video' => 'required|file|mimetypes:video/mp4|max:1024000',
     ];
 
     /**
@@ -77,13 +77,17 @@ class laporanController extends Controller
         } else {
             $data = $request->all();
             $laporan = $request->file('laporan');
+            $video = $request->file('video');
             $nama = Str::random(16) . round(microtime(true)) . '.' . $laporan->guessExtension();
+            $namaVideo = Str::random(5) . '.' . $video->guessExtension();
 
             $laporan->move('file/laporan', $nama);
+            $video->move('file/video', $namaVideo);
 
             $data['idUser'] = Auth::user()->id;
             $data['nama'] = Auth::user()->name;
             $data['laporan'] = $nama;
+            $data['video'] = $namaVideo;
 
             $input = laporanModel::create($data);
             $alert = [

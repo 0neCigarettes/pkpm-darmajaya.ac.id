@@ -48,6 +48,17 @@
               @enderror
           </div>
         </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Upload Video</label>
+            <input type="file" name="video" class="form-control" required>
+            @error('laporan')
+                <span class="invalid-feedback" role="alert" style="background: #fb0601;">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+          </div>
+        </div>
         @if($resposnse['status'])
           <div class="col-md-12">
             <div class="alert alert-info">
