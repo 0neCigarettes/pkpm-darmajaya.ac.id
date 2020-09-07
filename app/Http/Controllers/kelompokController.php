@@ -117,8 +117,10 @@ class kelompokController extends Controller
 	public function tambahpeserta($idkelompok, $idpeserta, $idDpl)
 	{
 
-		//insert id dpl to peserta
+		$idUser = pesertaModel::select('idUser')->where('id', '=', $idpeserta)->first();
+		// return json_encode($idUser['idUser']);
 
+		$dpl = User::where('id', $idUser['idUser'])->update(['dpl'=> $idDpl]);
 
 		$insert = detailkelompokModel::create([
 			'idKelompok' => $idkelompok,
@@ -128,7 +130,7 @@ class kelompokController extends Controller
 		$alert = [
 			'afterAction' => true,
 		];
-		if ($insert) {
+		if ($insert && $dpl) {
 			$alert['msg'] = 'Peserta Berhasil Ditambahkan';
 			$alert['sukses'] = true;
 		} else {
