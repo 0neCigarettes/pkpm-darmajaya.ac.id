@@ -127,8 +127,8 @@ class adminController extends Controller
         $data = $request->all();
         $ganti = 2;
         $data['status'] = $ganti;
-        $update = pesertaModel::where('id', $id)
-            ->update($data);
+        $update = pesertaModel::where('id', $id)->update($data);
+        
         $alert = [
             'afterAction' => true
         ];
