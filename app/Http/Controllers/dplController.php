@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\laporanModel;
 use Illuminate\Http\Request;
 
 class dplController extends Controller
@@ -13,7 +15,10 @@ class dplController extends Controller
      */
     public function index()
     {
-        
+        $userActive = auth()->user()->id;
+        $data = User::where('dpl', '=', $userActive)->get();
+        return view('dpl.index')->with(['datas' => $data]);
+        // return json_encode($data);
     }
 
     /**

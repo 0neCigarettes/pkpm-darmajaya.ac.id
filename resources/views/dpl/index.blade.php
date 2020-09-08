@@ -1,7 +1,6 @@
 @extends('layouts.dplLayouts')
 @section('header_content')
-  Data Mahasiswa
-@endsection
+  Data Mahasiswa Bimbingan Anda
 @section('content')
-  asfafasfga
+  asfafasfga {{$datas}}
 @endsection

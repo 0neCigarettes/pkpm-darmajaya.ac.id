@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\dplController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -113,4 +114,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:3']], function () {
     //uploadLapranPKPM
     Route::get('/mahasiswa/uploadLaporan', 'laporanController@index')->name('uploadLapranPKPM');
     Route::post('/mahasiswa/uploadLaporan/input', 'laporanController@store')->name('inputLaporan');
+});
+
+//dpl
+Route::group(['middleware' => ['auth', 'ceklevel:4']], function () {
+    Route::get('/dpl', 'dplController@index')->name('indexDpl');
 });

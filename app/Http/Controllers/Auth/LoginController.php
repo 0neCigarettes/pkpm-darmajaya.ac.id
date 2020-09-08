@@ -33,6 +33,8 @@ class LoginController extends Controller
             return '/sekjur';
         } else if (auth()->user()->level == 3) {
             return '/mahasiswa';
+        } else if (auth()->user()->level == 4) {
+            return '/dpl';
         }
         return '/admin';
         // return RouteServiceProvider::HOME;

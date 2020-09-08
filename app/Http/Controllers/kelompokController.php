@@ -32,12 +32,12 @@ class kelompokController extends Controller
 			)->orderBy('tb_kelompok.namaKelompok')->paginate(5);
 
 		$lastNokel = kelompokModel::select('namaKelompok')->orderBy('namaKelompok', 'DESC')->first();
-		$a;		
-		if ($lastNokel == null){
-					$a = 0;
-				}else{
-					$a = $lastNokel['namaKelompok'];
-				}
+		$a;
+		if ($lastNokel == null) {
+			$a = 0;
+		} else {
+			$a = $lastNokel['namaKelompok'];
+		}
 		$nokel = (int) $a + 1;
 		$data = kelompokModel::join('users', 'tb_kelompok.dpl', '=', 'users.id')
 			->select('tb_kelompok.idKelompok', 'tb_kelompok.namaKelompok', 'users.name', 'tb_kelompok.namaTempat')->paginate(5);
@@ -120,7 +120,7 @@ class kelompokController extends Controller
 		$idUser = pesertaModel::select('idUser')->where('id', '=', $idpeserta)->first();
 		// return json_encode($idUser['idUser']);
 
-		$dpl = User::where('id', $idUser['idUser'])->update(['dpl'=> $idDpl]);
+		$dpl = User::where('id', $idUser['idUser'])->update(['dpl' => $idDpl]);
 
 		$insert = detailkelompokModel::create([
 			'idKelompok' => $idkelompok,
@@ -228,11 +228,20 @@ class kelompokController extends Controller
 	 */
 	public function destroy($id, $idkelompok)
 	{
+		$a = detailkelompokModel::select('idPeserta')->where('idDetail', $id)->first();
+		$b = pesertaModel::select('idUser')->where(['id' => $a['idPeserta']])->first();
+		$c = User::select('id')->where('id', '=', $b['idUser'])->first();
+		$idUser = $c['id'];
+
+		$default = 0;
+		$dpl = User::where('id', $idUser)->update(['dpl' => $default]);
+
+		// return json_encode($idUser);
 		$delete = detailkelompokModel::where('idDetail', $id)->delete();
 		$alert = [
 			'afterAction' => true,
 		];
-		if ($delete) {
+		if ($delete && $dpl) {
 			$alert['msg'] = 'Peserta Berhasil Dihapus';
 			$alert['sukses'] = true;
 		} else {
