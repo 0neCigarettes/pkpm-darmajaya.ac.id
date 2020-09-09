@@ -14,6 +14,13 @@ class guestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function download($lokasi,$nama_file)
+    {
+        $file_path = public_path('file/'.$lokasi.'/'.$nama_file);
+        return response()->download($file_path);
+    }
+        
     public function index()
     {
         $panduan = panduanModel::paginate(7);

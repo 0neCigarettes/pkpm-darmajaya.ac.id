@@ -90,7 +90,10 @@
               <!-- /input-group -->
             </li>
             <li>
-            <a href="#" class="active"><i class="fa fa-edit fa-fw"></i> Data Mahasiswa</a>
+              <a href="{{ route('indexDpl') }}" class="active"><i class="fa fa-edit fa-fw"></i> Data Mahasiswa</a>
+            </li>
+            <li>
+              <a href="{{ route('lihatLaporanindpl') }}" class="active"><i class="fa fa-edit fa-fw"></i> Laporan pkpm</a>
             </li>
           </ul>
         </div>

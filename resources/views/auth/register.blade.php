@@ -1,98 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Register</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="{{ url('/regis/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css')}}">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PKPM@Darmajaya.ac.id</title>
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{{ url('/regis/css/style.css')}}">
+	</head>
 
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="{{ url('asset/fonts/material-icon/css/material-design-iconic-font.min.css')}}">
+	<body>
 
-    <!-- Main css -->
-    <link rel="stylesheet" href="{{ url('asset/css/style.css')}}">
-</head>
-
-<body>
-
-    <div class="main">
-
-        <!-- Sign up form -->
-        <section class="signup">
-            <div class="container">
-                <div class="signup-content">
-                    <div class="signup-form">
-                        <h2 class="form-title">Buat Akun Anda</h2>
-                        <form method="POST" action="{{ route('register') }}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="username"><i class="zmdi zmdi-account-box-mail"></i></label>
-                                <input type="text" name="username" id="username" placeholder="User Name" />
-                                @error('username')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Nama" />
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="jurusan"><i class="zmdi zmdi-nature-people"></i></label>
-                                <input type="text" name="jurusan" id="jurusan" placeholder="Jurusan" />
-                                @error('jurusan')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="E-Mail Anda" />
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" id="pass" placeholder="Password" />
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="password-confirm"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Ulangi Password Anda" />
-                            </div>
-                            <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="register" />
-                            </div>
-                        </form>
+		<div class="wrapper" style="background: #293860;">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="{{ url('statics/dj1.png')}}" alt="">
+				</div>
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+					<h3>Registrasi Akun Anda</h3>
+					<div class="form-wrapper">
+                        <input id="name" type="text" placeholder="Nama Lengkap" name="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <i class="zmdi zmdi-card"></i>
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+					</div>
+					<div class="form-wrapper">
+                        <input id="username" placeholder="Username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="name" autofocus>
+                        <i class="zmdi zmdi-account"></i>
+                        @error('username')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+					</div>
+                    <div class="form-wrapper">
+                        <select name="jurusan"  class="form-control" required>
+                            <option value="">Pilih Jurusan</option>
+                            <option value="Tehnik Informatika">Tehnik Informatika</option>
+                            <option value="Sistem Informasi">Sistem Informasi</option>
+                            <option value="Sistem Komputer">Sistem Komputer</option>
+                            <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
+                            <option value="Manajemen">Manajemen</option>
+                            <option value="Akuntansi">Akuntansi</option>
+                            <option value="Bisnis Digital">Bisnis Digital</option>
+                        </select>
+                        <i class="zmdi zmdi-caret-down" style="font-size: 17px"></i>
+                        @error('jurusan')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-                    <div class="signup-image">
-                        <figure><img src="asset/images/signup-image.jpg" alt="sing up image"></figure>
-                        <a href="{{ route('login')}}" class="signup-image-link">Log In</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <!-- JS -->
-    <script src="{{ url('vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{ url('js/main.js')}}"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-
+					<div class="form-wrapper">
+                        <input id="email" placeholder="Alamat E-Mail" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                        <i class="zmdi zmdi-email"></i>
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+					</div>
+					<div class="form-wrapper">
+                        <input id="password" placeholder="Password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                        <i class="zmdi zmdi-lock"></i>
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+					</div>
+					<div class="form-wrapper">
+                        <input id="password-confirm" placeholder="Confirm Password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+						<i class="zmdi zmdi-lock"></i>
+					</div>
+					<button type="submit" class="btn btn-primary">Register
+						<i class="zmdi zmdi-arrow-right"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+        
+	</body>
 </html>

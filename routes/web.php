@@ -20,6 +20,7 @@ Route::get('/kkn-fakultas', 'guestController@kkn')->name('kkn');
 Route::get('/pkpm', 'guestController@pkpm')->name('pkpm');
 Route::get('/kontak', 'guestController@kontak')->name('kontak');
 Route::get('/observasi', 'guestController@observasi')->name('observasiInGuest');
+Route::get('/guest/download/file/{path}/{nama_file}', 'guestController@download')->name('downloadinguest');
 
 
 Route::get('/login', function () {
@@ -34,6 +35,9 @@ Auth::routes();
 
 //admin
 Route::group(['middleware' => ['auth', 'ceklevel:1']], function () {
+
+    //admin
+    Route::get('/admin/download/file/{path}/{nama_file}', 'dplController@download')->name('downloadFileinadmin');
 
     //mahasiswa daftar
     Route::get('/admin', 'adminController@index')->name('cekRegistrasiPKPM');
@@ -88,6 +92,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:2']], function () {
     //hapus peserta
     Route::get('/sekjur/kelompok_mahasiswa/peserta/delete/{id}/{idKelompok}', 'kelompokController@destroy')->name('deleteInKelompok');
 
+    //download
+    Route::get('/sekjur/download/file/{path}/{nama_file}', 'dplController@download')->name('downloadinsekjur');
 
     //mahasiswa laporan
     Route::get('/sekjur/lihat_laporan_PKPM', 'adminController@lihatLaporanpkpm')->name('lihatLaporaninekjur');
@@ -114,9 +120,24 @@ Route::group(['middleware' => ['auth', 'ceklevel:3']], function () {
     //uploadLapranPKPM
     Route::get('/mahasiswa/uploadLaporan', 'laporanController@index')->name('uploadLapranPKPM');
     Route::post('/mahasiswa/uploadLaporan/input', 'laporanController@store')->name('inputLaporan');
+
+    //pesan
+    Route::get('/mahsiswa/bimbingan_mhs/{id}', 'dplController@pesan')->name('pesaninmhs');
+    Route::post('/mahasiswa/bimbingan_mhs/kirimpesan/{id}', 'dplController@kirimPesan')->name('krimPesaninmhs');
 });
 
 //dpl
 Route::group(['middleware' => ['auth', 'ceklevel:4']], function () {
     Route::get('/dpl', 'dplController@index')->name('indexDpl');
+
+    //laporan
+    Route::get('/dpl/lihat_laporan_PKPM', 'adminController@lihatLaporanpkpm')->name('lihatLaporanindpl');
+    Route::get('/dpl/lihat_laporan_PKPM/delete/{id}', 'laporanController@destroy')->name('hapusLaporanindpl');
+
+    //download file
+    Route::get('/download/file/{path}/{nama_file}', 'dplController@download')->name('downloadFile');
+
+    //pesan
+    Route::get('/dpl/bimbingan_mhs/{id}', 'dplController@pesan')->name('pesanindpl');
+    Route::post('/dpl/bimbingan_mhs/kirimpesan/{id}', 'dplController@kirimPesan')->name('krimPesanindpl');
 });

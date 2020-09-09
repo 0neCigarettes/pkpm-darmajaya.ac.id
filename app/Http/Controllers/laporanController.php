@@ -148,13 +148,14 @@ class laporanController extends Controller
     public function destroy($id)
     {
         $fileLama = laporanModel::where('id', $id)->first()['laporan'];
-        $delete = laporanModel::where('id', '=', $id)
-            ->delete();
+        $videoLama = laporanModel::where('id', $id)->first()['video'];
+        $delete = laporanModel::where('id', '=', $id)->delete();
         $alert = [
             'afterAction' => true
         ];
         if ($delete) {
             unlink('file/laporan/' . $fileLama);
+            unlink('file/video/' . $videoLama);
             $alert['msg'] = 'Berhasil Menghapus Laporan !';
             $alert['sukses'] = true;
         } else {
@@ -166,6 +167,8 @@ class laporanController extends Controller
             return redirect()->route('lihatLaporan')->with($alert);
         } else if (Auth()->user()->level == 2) {
             return redirect()->route('lihatLaporaninekjur')->with($alert);
+        } else if (Auth()->user()->level == 4) {
+            return redirect()->route('lihatLaporanindpl')->with($alert);
         }
         // return json_encode($fileLama);
     }

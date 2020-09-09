@@ -27,6 +27,7 @@
                           <th>Nama</th>
                           <th>NPM</th>
                           <th>laporan</th>
+                          <th>Video</th>
                           <th>aksi</th>
                       </tr>
                   </thead>
@@ -36,7 +37,10 @@
                       <td>{{ $data['nama'] }}</td>
                       <td>{{ $data['npm'] }}</td>
                       <td>
-                        <a href="{{url('file/laporan')}}/{{ $data['laporan']}}" class="btn btn-warning">Download</a>
+                        <a href="{{ route('downloadinsekjur', ['laporan',$data['laporan']]) }}" class="btn btn-warning">Download</a>
+                      </td>
+                      <td>
+                        <a href="{{ route('downloadinsekjur', ['video',$data['video']]) }}" class="btn btn-warning">Download</a>
                       </td>
                       <td>
                         <a href="{{route('hapusLaporaninsekjur', $data['id'])}}">

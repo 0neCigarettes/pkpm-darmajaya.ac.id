@@ -115,10 +115,16 @@ class adminController extends Controller
     public function lihatLaporanpkpm()
     {
         $data = laporanModel::get();
+        $dpl = auth()->user()->id;
+        $laporanInDpl = laporanModel::join('users', 'tb_uploadlaporanpkpm.idUser', '=', 'users.id')
+                        ->where('users.dpl', '=', $dpl)->get();
         if (auth()->user()->level == 1) {
             return view('admin.lihatLaporanpkpm')->with(['datas' => $data]);
         } else if (auth()->user()->level == 2) {
             return view('sekjur.lihatLaporanpkpm')->with(['datas' => $data]);
+        } else if (auth()->user()->level == 4) {
+            return view('dpl.laporan')->with(['datas' => $laporanInDpl]);
+        // return json_encode($laporanInDpl);
         }
     }
 

@@ -41,7 +41,7 @@
                   <tr>
                     <td>{{ $data['namaFile'] }}</td>
                     <td>
-                      <a href="{{ url('file/observasi')}}/{{ $data['file'] }}" class="btn btn-warning">Download</a>
+                      <a href="{{ route('downloadFileinadmin', ['observasi',$data['file']]) }}" class="btn btn-warning">Download</a>
                       <a href="{{ route('delete', $data['id'])}}">
                         <button class="btn btn-danger" onClick="return konfirmasi()">Hapus</button>
                       </a>

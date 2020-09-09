@@ -1,4 +1,4 @@
-@extends('layouts.adminLayouts')
+@extends('layouts.dplLayouts')
 @section('header_content')
   Laporan PKPM Mahasiswa
 @endsection
@@ -37,13 +37,13 @@
                       <td>{{ $data['nama'] }}</td>
                       <td>{{ $data['npm'] }}</td>
                       <td>
-                        <a href="{{ route('downloadFileinadmin', ['laporan',$data['laporan']]) }}" class="btn btn-warning">Download</a>
+                        <a href="{{ route('downloadFile', ['laporan',$data['laporan']]) }}" class="btn btn-warning">Download</a>
                       </td>
                       <td>
-                        <a href="{{ route('downloadFileinadmin', ['video',$data['video']]) }}" class="btn btn-warning">Download</a>
+                        <a href="{{ route('downloadFile', ['video',$data['video']]) }}" class="btn btn-warning">Download</a>
                       </td>
                       <td>
-                        <a href="{{route('hapusLaporan', $data['id'])}}">
+                        <a href="{{route('hapusLaporanindpl', $data['id'])}}">
                         <button class="btn btn-danger" onClick="return konfirmasi()">Hapus</button>
                         </a>
                       </td>

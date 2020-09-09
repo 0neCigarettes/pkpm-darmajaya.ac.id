@@ -101,9 +101,11 @@
             <li>
               <a href="{{ route('daftarPKPM')}}" class="active"><i class="fa fa-pencil-square-o fa-fw"></i> Daftar PKPM</a>
             </li>
+            @if (Auth::user()->dpl != null)
             <li>
-              <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i> Bimbingan Laporan PKPM</a>
+              <a href="{{ route('pesaninmhs', Auth::user()->dpl ) }}" class="active"><i class="fa fa-file-text fa-fw"></i> Bimbingan Laporan PKPM</a>
             </li>
+            @endif
             <li>
               <a href="{{ route('uploadLapranPKPM')}}" class="active"><i class="fa fa-upload fa-fw"></i> Upload Laporan PKPM</a>
             </li>
@@ -131,7 +133,7 @@
               <div class="panel-body">
                 @foreach ($beritas as $data)
                 <div class="list-group">
-                  <a href="{{ asset('file/berita')}}/{{$data['file']}}" class="list-group-item">
+                  <a href="{{ route('downloadinsekjur', ['berita',$data['file']]) }}" class="list-group-item">
                     <i class="fa fa-download fa-fw"></i> {{$data['namaBerita']}}
                   </a>
                 </div>
