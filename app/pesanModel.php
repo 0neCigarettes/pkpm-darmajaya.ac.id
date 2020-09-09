@@ -9,6 +9,6 @@ class pesanModel extends Model
     protected $table = 'tb_pesan';
 
     protected $fillable = [
-        'pengirim', 'penerima', 'pesan',
+        'pengirim', 'penerima', 'pesan', 'lampiran',
     ];
 }

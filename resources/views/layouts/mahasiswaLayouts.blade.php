@@ -133,7 +133,7 @@
               <div class="panel-body">
                 @foreach ($beritas as $data)
                 <div class="list-group">
-                  <a href="{{ route('downloadinsekjur', ['berita',$data['file']]) }}" class="list-group-item">
+                  <a href="{{ route('downloadFileInmhs', ['berita',$data['file']]) }}" class="list-group-item">
                     <i class="fa fa-download fa-fw"></i> {{$data['namaBerita']}}
                   </a>
                 </div>

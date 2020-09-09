@@ -32,8 +32,6 @@ class adminController extends Controller
             $sukses = false;
             $msg = 'Gagal Menambah DPL, Karena Email Sudah Digunakan.';
         } else {
-            // $password = bcrypt('12345678');
-            // Hash::make($data['password']),
             $request->request->add(['password' => Hash::make($request['password']),]);
             $level = 4;
             $request->request->add(['level' => $level]);

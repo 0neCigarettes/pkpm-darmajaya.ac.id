@@ -100,6 +100,14 @@
                     </div>
                     <p class="{{ $data->pengirim === auth()->user()->id ? 'pull-right' : 'pull-left' }}">
                         {{ $data['pesan'] }}
+                        <br>
+                        <br>
+                        <br>
+                        @if ($data['lampiran'] != null)
+                            <a href="{{ route('downloadFile', ['bimbingan',$data['lampiran']]) }}" class="btn btn-warning">
+                                download lampiran
+                            </a>
+                        @endif
                     </p>
                 </div>
             </li>
@@ -108,10 +116,16 @@
     </div>
     <!-- /.panel-body -->
     <div class="panel-footer">
-        <form action="{{ route('krimPesanindpl', $detail->id)}}" method="post">
+        <form action="{{ route('krimPesanindpl', $detail->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="input-group">
                 <input id="btn-input" type="text" name="pesan" class="form-control input-sm" placeholder="ketik pesan anda disini..."/>
+                <input id="btn-input" type="file" name="lampiran" class="form-control input-sm"/>
+                @error('lampiran')
+                <span class="invalid-feedback" role="alert" style="background: #fb0601;">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-warning btn-sm" id="btn-chat">kirim</button>
                 </span>

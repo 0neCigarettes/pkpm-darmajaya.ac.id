@@ -7,6 +7,7 @@ use App\User;
 use App\beritaModel;
 use App\laporanModel;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,17 @@ class dplController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public $messages = [
+        'required' => 'Harap Isi :attribute Anda',
+        'mimes' => 'Gagal ! Format file Harus .DOC/.DOCX !',
+        'file' => 'File Harus Berisi .DOC/.DOCX',
+        'max' => 'file Tidak Boleh Lebih Dari 50 Mb'
+    ];
+
+    public $rulesGambar = [
+        'lampiran' => 'file|mimes:mimes:doc,docx|max:51200',
+    ];
 
     public function download($lokasi,$nama_file)
     {
@@ -53,26 +65,42 @@ class dplController extends Controller
 
     public function kirimPesan(request $request, $id)
     {
-        $data = $request->all();
-        $data['pengirim'] = auth()->user()->id;
-        $data['penerima'] = $id;
 
-        $insert = pesanModel::create($data);
-
-        $alert = [
-            'afterAction' => true
-        ];
-        if ($insert) {
-            $alert['msg'] = 'Berhasil Mengirim Pesan';
-            $alert['sukses'] = true;
+        $validator = Validator::make($request->all(), $this->rulesGambar, $this->messages);
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
         } else {
-            $alert['msg'] = 'Gagal Mengirm Pesan';
-            $alert['sukses'] = false;
-        }
-        if (auth()->user()->level == 4){
-            return redirect()->route('pesanindpl', $id)->with($alert);
-        } else if (auth()->user()->level ==3){
-            return redirect()->route('pesaninmhs', $id)->with($alert);
+            $data = $request->all();
+            $lampiran = $request->file('lampiran');
+            if ($lampiran != null){
+                $nama = Str::random(16) . round(microtime(true)) . '.' . $lampiran->guessExtension();
+                $data['lampiran'] = $nama;
+            }
+            $data['pengirim'] = auth()->user()->id;
+            $data['penerima'] = $id;
+            
+            $insert = pesanModel::create($data);
+            $alert = [
+                'afterAction' => true
+            ];
+            if ($insert) {
+                if ($lampiran != null){
+                    $lampiran->move('file/bimbingan', $nama);
+                }
+                $alert['msg'] = 'Berhasil Mengirim Pesan';
+                $alert['sukses'] = true;
+            } else {
+                $alert['msg'] = 'Gagal Mengirm Pesan';
+                $alert['sukses'] = false;
+            }
+            if (auth()->user()->level == 4){
+                return redirect()->route('pesanindpl', $id)->with($alert);
+            } else if (auth()->user()->level ==3){
+                return redirect()->route('pesaninmhs', $id)->with($alert);
+            }
         }
 
     }
@@ -81,7 +109,7 @@ class dplController extends Controller
     {
         $berita = beritaModel::all();
         $userActive = auth()->user()->id;
-        $data = pesanModel::select('pesan', 'pengirim', 'penerima')
+        $data = pesanModel::select('pesan', 'pengirim', 'penerima', 'lampiran')
                 ->where([
                     ['pengirim', '=', $userActive],
                     ['penerima', '=', $id]

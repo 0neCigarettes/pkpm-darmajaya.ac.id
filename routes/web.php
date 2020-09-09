@@ -121,6 +121,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:3']], function () {
     Route::get('/mahasiswa/uploadLaporan', 'laporanController@index')->name('uploadLapranPKPM');
     Route::post('/mahasiswa/uploadLaporan/input', 'laporanController@store')->name('inputLaporan');
 
+    //download
+    Route::get('/mahasiswa/download/file/{path}/{nama_file}', 'dplController@download')->name('downloadFileInmhs');
+
     //pesan
     Route::get('/mahsiswa/bimbingan_mhs/{id}', 'dplController@pesan')->name('pesaninmhs');
     Route::post('/mahasiswa/bimbingan_mhs/kirimpesan/{id}', 'dplController@kirimPesan')->name('krimPesaninmhs');
