@@ -54,7 +54,7 @@
 
   .malasngoding-slider { 
     margin:20px auto;
-    width: 768px;
+    width: 768px auto;
     height: 450px; 
   }
 
