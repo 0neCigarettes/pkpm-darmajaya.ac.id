@@ -64,7 +64,12 @@
 													<a class="btn btn-success">Terkonfirmasi</a>
 												@endif
                       </td>
-                      <td><a href="{{ route('konfirmasiPendaftaranbysekjur', $data['id']) }}" class="btn btn-primary">Konfirmasi</a></td>
+                      <td>
+												<a href="{{ route('konfirmasiPendaftaranbysekjur', $data['id']) }}" class="btn btn-primary">Konfirmasi</a>
+												<a href="{{ route('hapusPeserta', $data['id']) }}">
+													<button class="btn btn-danger" onClick="return konfirmasi()">Hapus</button>
+												</a>
+											</td>
                     </tr>
                   @endforeach
 								</tbody>
