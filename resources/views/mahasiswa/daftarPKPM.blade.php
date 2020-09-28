@@ -161,6 +161,10 @@
           </div>
           @else
             <div class="col-md-12">
+              <div class="alert alert-danger">
+                <p align="center">Anda Belum Mendaftar/Berkas Pendaftaran Anda Sebelumnya Ditolak! Silahkan Daftar Dan Pastikan Data Anda Benar!</p>
+                
+              </div>
               <div class="form-group">
                 <input class="form-control btn btn-primary" type="submit" value="Daftar">
               </div>

@@ -176,6 +176,30 @@ class MahasiswaContoller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $file1 = pesertaModel::where('id', $id)->first()['pembayaranPKPM'];
+        $file2 = pesertaModel::where('id', $id)->first()['pembayaranBPP'];
+        $file3 = pesertaModel::where('id', $id)->first()['transkripKRS'];
+        $file4 = pesertaModel::where('id', $id)->first()['transkripNilai'];
+        $file5 = pesertaModel::where('id', $id)->first()['transkripSks'];
+        
+        $delete = pesertaModel::where('id', '=', $id)->delete();
+        
+        $alert = [
+            'afterAction' => true
+        ];
+        if ($delete) {
+            unlink('file/scanPKPM/' . $file1);
+            unlink('file/scanBPP/' . $file2);
+            unlink('file/scanKrs/' . $file3);
+            unlink('file/scanNilai/' . $file4);
+            unlink('file/scanSks/' . $file5);
+            $alert['msg'] = 'Berhasil Menghapus Laporan !';
+            $alert['sukses'] = true;
+        } else {
+            $alert['msg'] = 'Terjadi Kesalahan Saat Menghapus Laporan !';
+            $alert['sukses'] = false;
+        }
+
+        return redirect()->back()->with($alert);
     }
 }
